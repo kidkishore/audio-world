@@ -6,9 +6,7 @@ import backgroundImage from '../models/space.jpeg';
 import OrbitControls from 'three-orbitcontrols';
 import {BASS, LOMID, TREBLE} from '../constants';
 
-
-
-//INITIAL CAMERA
+//INITIAL CAMERA AND RENDERER
 export const getThreeCameraAndRenderer = () => {
     const bottomNavigation = 0;
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight-bottomNavigation), 0.01, 1500);
