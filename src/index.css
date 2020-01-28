@@ -1,0 +1,147 @@
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+  background-color: black !important; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 300 !important;
+    text-transform: uppercase !important;
+}
+
+.sideMenu {
+    /*position: absolute;
+    background: white;
+    height: 100%;
+    color: white;
+    float: left;
+    */
+}
+.mainScene {
+    /*
+    background: white;
+    height: 100%;
+    color: white;
+    float: left;
+        */
+}
+
+.appScene {
+    padding: 0em 0em !important;
+    background: darkblue;
+}
+
+.appPushable, .ui.bottom.attached.segment.active.tab, .ui.visible.left.sidebar {
+    background: rgba(50, 50, 50, 0.5) !important;
+}
+
+.appPushable {
+    margin: 0em !important;
+    background: rgba(50, 50, 50, 0.5) !important;
+    border-width: 0px !important;
+    border-radius: 0px !important;
+}
+
+
+
+.ui.buttons {
+    float: left !important;
+}
+
+.headerButtons {
+    border-top-right-radius: 0rem !important;
+    border-top-left-radius: 0rem !important;
+    border-bottom-right-radius: 0rem !important;
+    border-bottom-left-radius: 0rem !important;
+    background-color: #000000 !important;
+    color: #de1d2a !important;
+    border-style: solid !important;
+    border-color: #de1d2a !important;
+    border-width: 1px !important;
+    float: left;
+}
+
+.recordButton {
+  position: absolute;
+  right: 1rem;
+  top: 6rem;
+}
+
+.sideBar {
+    border-radius: 0px !important;
+}
+
+.MuiTypography-root {
+    color: white;
+}
+
+.MuiSlider-rail {
+    color: grey;
+}
+
+.MuiSlider-track {
+    color: green;
+}
+
+.MuiSlider-thumb {
+
+    color:white;
+}
+
+
+#p5 {
+    width:80%;
+
+}
+
+.newYearText {
+  font-size: 70px;
+  line-height: 6rem;
+
+  width: 45rem;
+  position: relative;
+  top: -1rem;
+  left: -6.5rem;
+  color: #ffdb70;
+  text-shadow: 2px 2px 8px #000000;
+}
+
+.CountDown {
+  position: absolute;
+  margin: 0 40%;
+  top: 7rem;
+}
+
+#happyNewYear-div {
+  font-family: sans-serif;
+  color: black;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 73px;
+  width: 42rem;
+  position: relative;
+  left: -8.5rem;
+}
+
+#happyNewYear-div > div {
+  padding: 10px;
+  border-radius: 3px;
+  background: black;
+  display: inline-block;
+  position: relative;
+  bottom: -29rem;
+}
+
+#happyNewYear-div div > span {
+  padding: 25px;
+  border-radius: 3px;
+  background: #ffdb70;
+  display: inline-block;
+}
+
+.smalltext {
+  padding-top: 5px;
+  font-size: 16px;
+  color: #ffdb70;
+}

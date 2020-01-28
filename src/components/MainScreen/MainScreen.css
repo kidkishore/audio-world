@@ -1,0 +1,49 @@
+.showAudio {
+  display: block;
+  position: relative;
+  top: 80px;
+}
+
+.hidden {
+	display: none;
+}
+
+.volSlider {
+	text-align: left;
+	margin: 0.5rem auto;
+    width: 80%;
+}
+
+
+.bottomBar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  float: left;
+  background-color: black;
+}
+
+.songInfo {
+	display: inline-block;
+	color:white;
+}
+
+.albumArt {
+	display: inline-block;
+}
+
+.options {
+  transition: all 0.4s !important;
+}
+
+.menu-on {
+  transform: rotate(180deg);
+}
+
+.menu-off {
+  transform: rotate(0);
+}
+
+.active.item {
+  border-radius: 0px !important;
+}

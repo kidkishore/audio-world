@@ -1,0 +1,15 @@
+.ampControl {
+    margin: 0 auto;
+    width: 70%;
+    height: 25%;
+}
+
+.slider {
+    color: grey;
+    text-align: left;
+    width: 100%;
+}
+
+.volSlider {
+	margin: auto;
+}
