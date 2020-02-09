@@ -93,9 +93,9 @@ class MicPlayer extends Component {
   render() {
     return(
       <div className='fileControls'>
-        <Button className="startButton">
+        <button className="startButton">
           Start Recording
-        </Button>
+        </button>
         <div className='sketchCanvas'>
           <P5Wrapper
             sketch={this.sketch.bind(this)}>

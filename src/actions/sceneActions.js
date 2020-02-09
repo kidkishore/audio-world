@@ -28,6 +28,15 @@ export const editObject = (name, id) => dispatch => {
   });
 };
 
+export const editObjectFreq = (freq, damping, id) => dispatch => {
+  dispatch({
+      type: 'EDIT_OBJECT_FREQ',
+      response: freq,
+      responseDamp: damping,
+      id: id,
+  });
+};
+
 export const changeScene = scene => dispatch => {
   dispatch({
       type: 'CHANGE_SCENE',

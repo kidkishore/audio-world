@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../models/AW-logo-clear.png';
+import logo from '../../models/clear_back_logo.png';
 import './Navbar.css';
 
 
@@ -11,7 +11,9 @@ export default class Navbar extends Component {
   render() {
 
     var logoStyle = {
-      height: '4rem',
+      height: "4rem",
+      top: "5px",
+      position: "relative"
     }
     
     var linkStyle = {
@@ -25,7 +27,7 @@ export default class Navbar extends Component {
             <img src={logo} alt="Logo" className="homeLogo" style={logoStyle}/>
           </Link>
         </div>
-        <div className="navItem">
+        <div className="navItemLeft">
           <Link to="/about" style={linkStyle}>About</Link>
         </div>
       </div>

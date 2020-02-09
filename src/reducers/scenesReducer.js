@@ -138,6 +138,21 @@ const editObject = (sceneState, action) => {
 
 };
 
+//edit object freq from Objects array
+const editObjectFreq = (sceneState, action) => {
+
+  const newState = {...sceneState};
+  let newObjects = []
+
+  sceneState.objects.forEach(object => {
+    if (object.id !== action.id) // return all objects, but drop the one we're deleting
+      newObjects.push(object);
+    else
+      newObjects.push(updateObject(object, {response: action.response, responseDamp: action.responseDamp }));
+  })
+  return updateObject(newState, {objects: newObjects} );
+};
+
 //deleteobject from Objects array
 const changeTransform = (sceneState, action) => {
 
@@ -169,6 +184,8 @@ export function sceneReducer (sceneState = [], action){
         return deleteObject(sceneState, action)
     case 'EDIT_OBJECT':
         return editObject(sceneState, action)
+    case 'EDIT_OBJECT_FREQ':
+        return editObjectFreq(sceneState, action)
     case 'CHANGE_TRANSFORM':
       return changeTransform(sceneState, action)
     case 'CLEAR_OTR':

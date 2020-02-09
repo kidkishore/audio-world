@@ -183,7 +183,10 @@ export const mapStateToScene = (sceneState, frequencies, scene, clearObjectsToRe
       
 
       //modify scale w.r.t. frequencies
-      var responseFreq = frequencies[sceneObject.response] / sceneObject.responseDamp;
+      //console.log("frequency for: ", sceneObject.name)
+      //console.log(frequencies[sceneObject.response])
+      var responseFreq = (frequencies[sceneObject.response] * 1.0) / sceneObject.responseDamp;
+      //console.log('response freq:', responseFreq)
       var newScale = Math.max(responseFreq, 1);
       if(!newScale) newScale = 1;
 

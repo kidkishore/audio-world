@@ -16,9 +16,11 @@ import {
   clearObjectsToRemove,
   clearObjectsToEdit
 } from '../actions/sceneActions';
-
+import { setFrequencies } from '../actions/effectActions';
 import '../index.css'
 import { CanvasRecorder } from './CanvasRecorder';
+import axios from 'axios';
+import { audioStream, analyser } from './AudioPlayer/FilePlayer';
 
 
 class ThreeApp extends React.Component {
@@ -40,9 +42,11 @@ class ThreeApp extends React.Component {
 
       //Create the initial scene, camera, and renderer
       this.scene = getThreeScene(this.props.addObject);
-      this.recorder = new CanvasRecorder(this.threeRenderer.domElement, 4500000);
+      this.recorder = new CanvasRecorder(this.threeRenderer.domElement, audioStream, 's3_test_3');
       this.renderNextFrame();
       window.addEventListener("resize", this.updateDimensions.bind(this));
+
+    
   }
 
 
@@ -70,6 +74,12 @@ class ThreeApp extends React.Component {
       requestAnimationFrame(timestamp => {
           this.props.update(timestamp);
       });
+
+      if(analyser){
+        var dataArray = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(dataArray);
+        this.props.setFrequencies(dataArray);
+      }
   }
 
   updateDimensions = () => {
@@ -90,10 +100,54 @@ class ThreeApp extends React.Component {
     }else{
       this.setState({ recording: false });
       this.recorder.stop();
-      this.recorder.save();
+      //this.recorder.save('s3_test_1')
+      //const new_file = this.recorder.save('s3_test_2')
+      //console.log(new_file)
+      //this.handleUpload(new_file);
     }
 
   };
+
+  handleUpload = ( file ) => {
+    const data = new FormData();
+    console.log('handling file upload: ', file);
+// If file selected
+		if ( file ) {
+			data.append( 'webmVideo', file, file.name );
+			axios.post( '/api/profile/webm-video-upload', data, {
+				headers: {
+					'accept': 'application/json',
+					'Accept-Language': 'en-US,en;q=0.8',
+					'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+				}
+			})
+				.then( ( response ) => {
+					if ( 200 === response.status ) {
+						// If file size is larger than expected.
+						if( response.data.error ) {
+							if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
+								console.log( 'Max size: 2MB');
+							} else {
+								console.log( response.data );
+// If not the given file type
+								console.log( response.data.error);
+							}
+						} else {
+							// Success
+							let fileName = response.data;
+							console.log( 'filedata', fileName );
+							console.log( 'File Uploaded');
+						}
+					}
+				}).catch( ( error ) => {
+				// If another error
+				console.log( error );
+			});
+		} else {
+			// if file not selected throw error
+			console.log( 'Please upload file' );
+		}
+	}
 
   render() {
       return (
@@ -109,12 +163,13 @@ class ThreeApp extends React.Component {
 
 ThreeApp.propTypes = {
   sceneState: PropTypes.object,
-  frequencies: PropTypes.array,
+  frequencies: PropTypes.object,
   timestamp: PropTypes.number,
   update: PropTypes.func,
   addObject: PropTypes.func,
   clearObjectsToRemove: PropTypes.func,
   clearObjectsToEdit: PropTypes.func,
+  setFrequencies: PropTypes.func
 
 }
 
@@ -134,7 +189,7 @@ const mapDispatch = (dispatch) => {
     addObject: bindActionCreators(addObject, dispatch),
     clearObjectsToRemove: bindActionCreators(clearObjectsToRemove, dispatch),
     clearObjectsToEdit: bindActionCreators(clearObjectsToEdit, dispatch),
-
+    setFrequencies: bindActionCreators(setFrequencies, dispatch)
   };
 };
 

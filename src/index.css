@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .appScene {
     padding: 0em 0em !important;
-    background: darkblue;
+    background: black;
 }
 
 .appPushable, .ui.bottom.attached.segment.active.tab, .ui.visible.left.sidebar {
@@ -42,24 +42,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0px !important;
 }
 
-
-
-.ui.buttons {
-    float: left !important;
-}
-
-.headerButtons {
-    border-top-right-radius: 0rem !important;
-    border-top-left-radius: 0rem !important;
-    border-bottom-right-radius: 0rem !important;
-    border-bottom-left-radius: 0rem !important;
-    background-color: #000000 !important;
-    color: #de1d2a !important;
-    border-style: solid !important;
-    border-color: #de1d2a !important;
-    border-width: 1px !important;
-    float: left;
-}
 
 .recordButton {
   position: absolute;

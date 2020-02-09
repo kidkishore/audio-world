@@ -94,9 +94,9 @@ class DriverPlayer extends Component {
   render() {
     return(
       <div className='fileControls'>
-        <Button className="startButton">
+        <button className="startButton">
           Start Capturing Driver
-        </Button>
+        </button>
         <div className='sketchCanvas'>
           <P5Wrapper
             sketch={this.sketch.bind(this)}>

@@ -20,20 +20,25 @@
   bottom: 0px;
   width: 100%;
   float: left;
+  height: 4rem;
   background-color: black;
 }
 
-.songInfo {
-	display: inline-block;
-	color:white;
+.barButton {
+  float: left;
+  height: 4rem;
+  width: 4rem;
+  color: #de1d2a;
+  background-color: #000000;
+  border-style: solid;
+  border-color: #de1d2a;
+  border-width: 1px;
 }
 
-.albumArt {
-	display: inline-block;
-}
 
 .options {
   transition: all 0.4s !important;
+  font-size: 1.5rem  !important;
 }
 
 .menu-on {

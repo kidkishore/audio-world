@@ -2,10 +2,9 @@
 // To record canvas effitiently using MediaRecorder
 // https://webrtc.github.io/samples/src/content/capture/canvas-record/
 
-export function CanvasRecorder(canvas, video_bits_per_sec) {
+export function CanvasRecorder(canvas, audioStream, output_name) {
   this.start = startRecording;
   this.stop = stopRecording;
-  this.save = download;
 
   var recordedBlobs = [];
   var supportedType = null;
@@ -17,13 +16,11 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
       return;
   }
 
-  const video = document.createElement('video');
-  video.style.display = 'none';
-
   function startRecording() {
       let types = [
-        "video/webm",
+        "video/mp4",
         'video/webm,codecs=vp9',
+        "video/webm",
         'video/vp8',
         "video/webm;codecs=vp8",
         "video/webm;codecs=daala",
@@ -34,18 +31,23 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
       for (let i in types) {
           if (MediaRecorder.isTypeSupported(types[i])) {
               supportedType = types[i];
+              console.log('Recording with: ', supportedType)
               break;
           }
       }
       if (supportedType == null) {
-          //console.log("No supported type found for MediaRecorder");
+          console.log("No supported type found for MediaRecorder");
       }
       let options = { 
-          mimeType :  'video/webm;codecs=h264',
-          videoBitsPerSecond: video_bits_per_sec || 2500000 // 2.5Mbps
+          mimeType :  supportedType//,
+          //videoBitsPerSecond: video_bits_per_sec || 2500000 // 8.5Mbps
       };
 
       recordedBlobs = [];
+      console.log('video stream in recorder: ', stream);
+      console.log('audio stream in recorder: ', audioStream);
+      stream.addTrack(audioStream.getAudioTracks()[0]);
+      console.log('combined in recorder: ', stream);
       try {
           mediaRecorder = new MediaRecorder(stream, options);
       } catch (e) {
@@ -68,19 +70,24 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
   }
 
   function handleStop() {
-      const superBuffer = new Blob(recordedBlobs, { type: outputType });
-      video.src = window.URL.createObjectURL(superBuffer);
+      download()
   }
 
-  function stopRecording() {
+  function stopRecording(name) {
       mediaRecorder.stop();
-      //console.log('Recorded Blobs: ', recordedBlobs);
-      video.controls = true;
   }
 
-  function download(file_name) {
-      const name = file_name || 'recording.webm';
-      const blob = new Blob(recordedBlobs, { type: outputType });
+  function download() {
+      const name = output_name + '.webm';
+      console.log('before final blob');
+      const blob = new Blob(recordedBlobs, {type: supportedType} );
+      console.log('after final blob');
+      //console.log('the blob: ', blob)
+      //blob.name = name
+      //blob.lastModifiedDate = new Date();
+      //return blob
+      //return new File([blob], name + '.webm')
+
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
@@ -88,6 +95,7 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
       a.download = name;
       document.body.appendChild(a);
       a.click();
+      console.log('click done');
       setTimeout(() => {
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);

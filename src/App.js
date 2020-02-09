@@ -6,7 +6,10 @@ import { Helmet } from 'react-helmet'
 import MainScreen from './components/MainScreen/MainScreen';
 import About from "./components/About/About";
 import Navbar from "./components/Navbar/Navbar";
+import Favicon from 'react-favicon';
 import store from './store';
+import favicon from './models/favicon.png';
+
 
 class App extends Component {
   render() {
@@ -15,6 +18,7 @@ class App extends Component {
         <Helmet>
           <title>AudioWorld.io: Visualizing your music in new ways.</title>
         </Helmet>
+        <Favicon url={favicon} />
         <Provider store={store}>
           <Navbar />
           <Route path="/" exact component={MainScreen} />

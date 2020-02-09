@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
-    Button,
     Menu,
     Segment,
     Sidebar,
     Tab,
   } from 'semantic-ui-react';
 import ThreeApp from '../../containers/ThreeApp';
-import AudioMenu from '../../containers/AudioMenu';
+import AudioMenu from '../../containers/AudioMenu/AudioMenu';
 import SceneMenu from '../../containers/SceneMenu/SceneMenu';
 import AudioPlayer from '../../containers/AudioPlayer/AudioPlayer';
 import '../../index.css'; 
@@ -60,9 +59,9 @@ class MainScreen extends Component {
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <div className='bottomBar'>
-          <Button className="ui icon button headerButtons" onClick={this.handleClick} >
+          <button className="barButton" onClick={this.handleClick} >
               <i aria-hidden="true" className={this.state.visible ? "options icon menu-on" : "options icon menu-off"}></i>
-          </Button>
+          </button>
           <AudioPlayer />
         </div>   
       </div>

@@ -41,14 +41,6 @@
   padding: 0.5rem 1rem;
 }
 
-.floating.labeled.dropdown {
-  background: #cfcfcf00;
-  border: solid white 1px;
-  border-radius: 3px;
-  padding: 0.2rem 0.5rem;
-  margin: 0 0.5rem;
-}
-
 .modelUpload {
   display: inline-block;
   width: 70%;

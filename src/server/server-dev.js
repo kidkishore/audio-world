@@ -14,6 +14,10 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))
 
+
+const profile = require( './profile' );
+app.use( '/api/profile', profile );
+
 app.use(webpackHotMiddleware(compiler))
 
 app.get('*', (req, res, next) => {

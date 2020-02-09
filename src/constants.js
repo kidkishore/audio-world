@@ -11,26 +11,31 @@ export const responses = [
     key: 0,
     text: 'Bass',
     value: 0,
+    damping: 200
   },
   {
     key: 1,
     text: 'loMid',
     value: 1,
+    damping: 200
   },
   {
     key: 2,
     text: 'Mid',
     value: 2,
+    damping: 200
   },
   {
     key: 3,
     text: 'hiMid',
     value: 3,
+    damping: 200
   },
   {
     key: 4,
     text: 'Treble',
     value: 4,
+    damping: 80
   },
 ];
 
