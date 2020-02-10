@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import P5Wrapper from 'react-p5-wrapper';
 import { setFrequencies } from '../../actions/effectActions';
-import { Button } from 'semantic-ui-react';
 import p5 from 'p5';
 import './AudioPlayer.css';
 import '../../index.css';
@@ -34,17 +33,16 @@ class DriverPlayer extends Component {
       
 
       audioGrab = new p5.AudioIn();
-      console.log('getting sources');
 
       audioGrab.getSources(function(deviceList) {
-          console.log(deviceList);
+          //console.log(deviceList);
           //print out the array of available sources
           for(var i = 0; i < deviceList.length; i++)
           {
             //console.log(deviceList[i].label);
               if(deviceList[i].label.endsWith("(VB-Audio Virtual Cable)")){
               //if(deviceList[i].label.endsWith("(Realtek Audio)")){
-                  console.log('cable found at ', i);
+                  //console.log('cable found at ', i);
                   audioGrab.setSource(i);
                   //audioGrab.connect();
                   audioGrab.start();

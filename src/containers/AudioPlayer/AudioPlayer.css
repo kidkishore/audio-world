@@ -8,7 +8,7 @@
   float: left;
   height: 4rem;
   text-align: left;
-  width: 90%;
+  width: 80%;
 }
 
 .sketchCanvas {
@@ -18,7 +18,7 @@
 .fileControls {
 
   display: inline-block;
-  width: 60%;
+  width: 80%;
 }
 
 .songUpload {
@@ -40,11 +40,12 @@
   margin: 0.2rem 1rem;
   position: relative;
   top: 6px;
+  width: 40%;
 }
 
 .audioDropdown {
   display: inline-block;
-  width: 20rem;
+  width: 20%;
   position: relative;
   top: -8px;;;
   left: 1rem;

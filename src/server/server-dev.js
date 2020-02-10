@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../../webpack.dev.config.js'
+var bodyParser = require('body-parser');
 
 const app = express(),
             DIST_DIR = __dirname,
@@ -14,9 +15,14 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))
 
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const profile = require( './profile' );
 app.use( '/api/profile', profile );
+
+const transcoder = require( './transcoder' );
+app.use( '/api/transcoder', transcoder );
 
 app.use(webpackHotMiddleware(compiler))
 

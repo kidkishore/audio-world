@@ -6,6 +6,8 @@ import backgroundImage from '../models/space.jpeg';
 import OrbitControls from 'three-orbitcontrols';
 import {BASS, LOMID, TREBLE} from '../constants';
 
+export var threeCanvas;
+
 //INITIAL CAMERA AND RENDERER
 export const getThreeCameraAndRenderer = () => {
     const bottomNavigation = 0;
@@ -17,6 +19,7 @@ export const getThreeCameraAndRenderer = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight-bottomNavigation);
     container.appendChild(renderer.domElement);
+    threeCanvas = renderer.domElement;
 
     var controls = new OrbitControls(camera, renderer.domElement);
 

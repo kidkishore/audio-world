@@ -36,6 +36,7 @@
     "react-favicon": "0.0.17",
     "react-hot-loader": "^4.12.19",
     "react-media-recorder": "^1.2.0",
+    "react-modal": "^3.11.1",
     "recordrtc": "^5.5.8",
     "three": "^0.111.0",
     "three-gltf-loader": "^1.111.0",

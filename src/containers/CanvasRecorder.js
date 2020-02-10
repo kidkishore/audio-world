@@ -1,15 +1,15 @@
 // CanvasRecorder.js - smusamashah
 // To record canvas effitiently using MediaRecorder
 // https://webrtc.github.io/samples/src/content/capture/canvas-record/
+import { audioStream } from './AudioPlayer/FilePlayer';
 
-export function CanvasRecorder(canvas, audioStream, output_name) {
+export function CanvasRecorder(canvas, output_name) {
   this.start = startRecording;
   this.stop = stopRecording;
 
   var recordedBlobs = [];
   var supportedType = null;
   var mediaRecorder = null;
-  var outputType = 'video/webm'
 
   var stream = canvas.captureStream();
   if (typeof stream == undefined || !stream) {
@@ -31,23 +31,26 @@ export function CanvasRecorder(canvas, audioStream, output_name) {
       for (let i in types) {
           if (MediaRecorder.isTypeSupported(types[i])) {
               supportedType = types[i];
-              console.log('Recording with: ', supportedType)
+              //console.log('Recording with: ', supportedType)
               break;
           }
       }
       if (supportedType == null) {
-          console.log("No supported type found for MediaRecorder");
+          //console.log("No supported type found for MediaRecorder");
       }
       let options = { 
-          mimeType :  supportedType//,
-          //videoBitsPerSecond: video_bits_per_sec || 2500000 // 8.5Mbps
+          mimeType :  supportedType,
+          videoBitsPerSecond: 5000000 // 8.5Mbps
       };
 
       recordedBlobs = [];
-      console.log('video stream in recorder: ', stream);
-      console.log('audio stream in recorder: ', audioStream);
-      stream.addTrack(audioStream.getAudioTracks()[0]);
-      console.log('combined in recorder: ', stream);
+      //console.log('video stream in recorder: ', stream);
+      //
+      if(audioStream && audioStream.getAudioTracks()[0]){
+        console.log('audio stream in recorder: ', audioStream);
+        stream.addTrack(audioStream.getAudioTracks()[0]);
+      }
+      //console.log('combined in recorder: ', stream);
       try {
           mediaRecorder = new MediaRecorder(stream, options);
       } catch (e) {
@@ -70,24 +73,24 @@ export function CanvasRecorder(canvas, audioStream, output_name) {
   }
 
   function handleStop() {
-      download()
+      
   }
 
-  function stopRecording(name) {
+  function stopRecording() {
       mediaRecorder.stop();
+      return download()
   }
 
   function download() {
       const name = output_name + '.webm';
-      console.log('before final blob');
       const blob = new Blob(recordedBlobs, {type: supportedType} );
-      console.log('after final blob');
       //console.log('the blob: ', blob)
       //blob.name = name
       //blob.lastModifiedDate = new Date();
       //return blob
-      //return new File([blob], name + '.webm')
+      return new File([blob], name)
 
+      /*
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
@@ -95,10 +98,10 @@ export function CanvasRecorder(canvas, audioStream, output_name) {
       a.download = name;
       document.body.appendChild(a);
       a.click();
-      console.log('click done');
       setTimeout(() => {
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
       }, 100);
+      */
   }
 }

@@ -10,8 +10,6 @@ class FrequencyViz extends Component {
       var height = 400;
       var barWidth = 50;
       var bassFreq, loMidFreq, midFreq, hiMidFreq, trebleFreq;
-      var localFreq = []
-      var localAmpControl = [] 
 
       p.setup = () => {
         p.createCanvas(250, 275);
@@ -69,11 +67,6 @@ class FrequencyViz extends Component {
             
         );
     }
-}
-
-FrequencyViz.propTypes = {
-  frequencies: PropTypes.object,
-  ampControl: PropTypes.object
 }
 
 const mapStateToProps = state => {

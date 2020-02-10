@@ -55,7 +55,7 @@ export const scenes = [
     key: '3',
     text: 'Goomba',
     value: 'Goomba',
-  },    
+  },
   {
     key: '4',
     text: 'Munnar',
@@ -64,22 +64,22 @@ export const scenes = [
 ]
 
 export const sceneDetail = {
-  World:{
+  World: {
     Background: 'space.jpeg',
     Center: 'Earth.glb',
     Orbit: 'Duck.glb'
   },
-  Pineapple:{
+  Pineapple: {
     Background: 'water.jpg',
     Center: 'Pineapple.glb',
     Orbit: 'Starfish.glb'
   },
-  Munnar:{
+  Munnar: {
     Background: 'munnar.JPG',
     Center: 'DamagedHelmet.glb',
     Orbit: 'BrainStem.glb'
   },
-  Goomba:{
+  Goomba: {
     Background: 'snow.jpg',
     Center: 'Creature.glb',
     Orbit: 'Plumber.glb'
