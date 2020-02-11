@@ -43,12 +43,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.recordButton {
-  position: absolute;
-  right: 1rem;
-  top: 6rem;
-}
-
 .sideBar {
     border-radius: 0px !important;
 }

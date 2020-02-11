@@ -52,14 +52,37 @@ export const scenes = [
     value: 'Pineapple',
   },
   {
-    key: '3',
+    key: '2',
     text: 'Goomba',
     value: 'Goomba',
   },
   {
-    key: '4',
+    key: '3',
     text: 'Munnar',
     value: 'Munnar',
+  }
+]
+
+export const backgrounds = [
+  {
+    key: '0',
+    text: 'Space',
+    value: 'space.jpeg',
+  },
+  {
+    key: '1',
+    text: 'Snow',
+    value: 'snow.jpg',
+  },
+  {
+    key: '2',
+    text: 'Tea',
+    value: 'munnar.JPG',
+  },
+  {
+    key: '3',
+    text: 'Water',
+    value: 'water.jpg',
   }
 ]
 
@@ -134,17 +157,17 @@ export const objects = [
 export const streams = [
   {
     key: 0,
-    text: 'MICROPHONE',
+    text: ' MICROPHONE',
     value: 'MICROPHONE',
   },
   {
     key: 1,
-    text: 'FILE',
+    text: '    FILE',
     value: 'FILE',
   },
   {
     key: 2,
-    text: 'DRIVER',
+    text: ' DRIVER',
     value: 'DRIVER',
   }
 

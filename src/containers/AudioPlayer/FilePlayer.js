@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { setFrequencies, playPause } from '../../actions/effectActions';
+import VideoRecorder from '../../components/VideoRecorder/VideoRecorder';
 import './AudioPlayer.css';
 import '../../index.css';
 import 'babel-polyfill';
@@ -36,12 +37,10 @@ class FilePlayer extends Component {
     audioStream = document.getElementById("audioElem").captureStream();
 
     document.getElementById("audioElem").addEventListener("play", () => {
-      console.log('TRYING TO GET ONPLAY EVENT');
       this.props.playPause(true);
       this.analyseTracks();
     });
     document.getElementById("audioElem").addEventListener("pause", () => {
-      console.log('TRYING TO GET ONPAUSE EVENT');
       this.props.playPause(false);
     });
     //console.log('the loaded stream: ', audioStream)
@@ -70,6 +69,7 @@ class FilePlayer extends Component {
           <audio id="audioElem" controls >
             <source src="" id="srcElem"/>
           </audio>
+          <VideoRecorder />
         </div>
     );
   }

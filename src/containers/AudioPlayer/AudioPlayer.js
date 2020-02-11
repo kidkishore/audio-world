@@ -26,6 +26,7 @@ class AudioPlayer extends Component {
               <div className='audioDropdown'>
                 Input:
                 <Dropdown
+                  className='innerDropdown'
                   floating
                   labeled
                   defaultValue={this.state.stream}

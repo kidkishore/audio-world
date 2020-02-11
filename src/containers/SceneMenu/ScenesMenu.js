@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Button } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import './SceneMenu.css';
 import { changeScene } from '../../actions/sceneActions.js';

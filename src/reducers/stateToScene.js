@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import GLTFLoader from 'three-gltf-loader';
 
 
-const changeObj = (name, objectToEdit) => {
+export const changeObj = (name, objectToEdit) => {
 
   import('../models/' + name)
   .then(newModule => {
@@ -20,7 +20,7 @@ const changeObj = (name, objectToEdit) => {
   
 };
 
-const changeBackground = (name, objectToEdit) => {
+export const changeBackground = (name, objectToEdit) => {
 
   import('../models/' + name)
   .then(newModule => {

@@ -24,6 +24,9 @@ app.use( '/api/profile', profile );
 const transcoder = require( './transcoder' );
 app.use( '/api/transcoder', transcoder );
 
+const emailer = require( './emailer' );
+app.use( '/api/emailer', emailer );
+
 app.use(webpackHotMiddleware(compiler))
 
 app.get('*', (req, res, next) => {

@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export const SendFile = ( file ) => {
+export const SendFile = (name, email, file ) => {
   const data = new FormData();
   console.log('handling file upload: ', file);
 // If file selected
   if ( file ) {
-    data.append( 'webmVideo', file, file.name );
+    data.append( 'webmVideo', file, name);
     axios.post( '/api/profile/webm-video-upload', data, {
       headers: {
         'accept': 'application/json',
@@ -26,10 +26,9 @@ export const SendFile = ( file ) => {
             }
           } else {
             // Success
-            let fileName = response.data;
-            console.log( 'filedata', fileName );
-            console.log( 'File Uploaded');
-            createTranscoderJob(response);
+            console.log( 'File upload success');
+            var file_name = response.data.image
+            createTranscoderJob(file_name, email);
           }
         }
       }).catch( ( error ) => {
@@ -42,19 +41,42 @@ export const SendFile = ( file ) => {
   }
 }
 
-const createTranscoderJob = (s3Data) => {
-  console.log("origResponse: ", s3Data);
+const createTranscoderJob = (fileName, email) => {
+
+  var newFileName = fileName + '.mp4';
+  console.log('createTranscoderJob on: ', fileName)
 
   var params = {
-    inputKey: s3Data.data.image,
-    outputKey: s3Data.data.image.substr(0, s3Data.data.image.indexOf('.')) + '.mp4'
+    inputKey: fileName,
+    outputKey: newFileName
   }
 
   axios.post('/api/transcoder/create-job', params)
   .then(function (response) {
-    console.log("Transcoding success: ",response);
+    sendEmail(newFileName, email);
   })
   .catch(function (error) {
     console.log(error);
   });
 }
+
+const sendEmail = (fileName, email) => {
+  console.log("Transcoding success: ",fileName);
+  console.log('email to send: ', email);
+
+  const params = {
+    fileName: 'converted/' + fileName,
+    email: email
+  }
+
+  axios.post('/api/emailer/send-email', params)
+  .then(function (response) {
+    console.log('Email send success!!')
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+
+} 

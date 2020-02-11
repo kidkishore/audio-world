@@ -45,94 +45,75 @@ const loadObj = (objName, name, url, scene, addObject) => {
 
 
 //SCENE UPDATE
-export const getThreeScene = (addObject) => {
+export const getThreeScene = (initialBackground, initialCenter, initialOrbit, addObject) => {
 
 
+    var geometry;
     const scene = new THREE.Scene();
 
-    //add background
+  //////////*************Creating Background******************///////////
+  import('../models/' + initialBackground)
+    .then(newModule => {
 
-    var backGeo = new THREE.SphereBufferGeometry( 500, 60, 40 );
-    // invert the geometry on the x-axis so that all of the faces point inward
-    backGeo.scale( - 1, 1, 1 );
-    var texture = new THREE.TextureLoader().load( backgroundImage );
-    var material = new THREE.MeshBasicMaterial( { map: texture } );
-    var mesh = new THREE.Mesh( backGeo, material );
+      var backGeo = new THREE.SphereBufferGeometry( 500, 60, 40 );
+      // invert the geometry on the x-axis so that all of the faces point inward
+      backGeo.scale( - 1, 1, 1 );
+      
+      var texture = new THREE.TextureLoader().load( newModule.default );
+      var material = new THREE.MeshBasicMaterial( { map: texture } );
+      var mesh = new THREE.Mesh( backGeo, material );
 
+      var parent = new THREE.Object3D();
+      parent.name = 'Background';
 
-    var parent = new THREE.Object3D();
-    parent.name = 'Background';
+      scene.add(parent);
+      parent.add(mesh);
+      addObject(parent.id, 'Space', parent.name, BASS, 200);
 
-    scene.add(parent);
-    parent.add(mesh);
-    addObject(parent.id, 'Space', parent.name, BASS, 200);
-
-
-    //////////*************Creating Center******************///////////
-    var geometry = new THREE.SphereGeometry(1, 40, 40);
-
-
-     loadObj('Earth',"Center", centerModel, scene, addObject);    /************ Adding object 1************/
+    });
 
 
+  //////////*************Creating Center******************///////////
 
-    //////////*************Creating Other Scene Lights and Items******************///////////
-    var rotationMatrix = new THREE.Matrix4();
-    var targetQuaternion = new THREE.Quaternion();
-    var origin = new THREE.Vector3(0, 0, 0);
-    var planets = {};
+  import('../models/' + initialCenter + '.glb')
+  .then(newModule => {
+    geometry = new THREE.SphereGeometry(1, 40, 40);
+    loadObj('Earth',"Center", newModule.default, scene, addObject);    /************ Adding object 1************/
+  })
+      
 
+  //////////*************Creating Orbitals******************///////////
 
-    //lights
-    var ambientLight = new THREE.AmbientLight(0xffffff, 5);
-    ambientLight.position.set(-1, -1, -1).normalize();
-    //scene.add(ambientLight);
+  import('../models/' + initialOrbit + '.glb')
+    .then(newModule => {
 
-    var directionalLight = new THREE.DirectionalLight(0xfff1a8, 5);
-    directionalLight.position.set(10, 0, 10).normalize();
-    scene.add(directionalLight);
+      var numPlanets = 4;
+      var orbit = new THREE.Group();
+      var counter = 0;
 
-    directionalLight = new THREE.DirectionalLight(0xfff1a8, 5);
-    directionalLight.position.set(-10, 0, -10).normalize();
-    scene.add(directionalLight);
+      //vertices of our planets
+      var tetraVerts = [
+          [1, 0, -1 / Math.sqrt(2)],
+          [-1, 0, -1 / Math.sqrt(2)],
+          [0, 1, 1 / Math.sqrt(2)],
+          [0, -1, 1 / Math.sqrt(2)]
+      ];
 
-
-    
-
-//////////*************Creating Orbitals******************///////////
-    var numPlanets = 4;
-    var orbit = new THREE.Group();
-
-    var counter = 0;
-
-    var tetraVerts = [
-        [1, 0, -1 / Math.sqrt(2)],
-        [-1, 0, -1 / Math.sqrt(2)],
-        [0, 1, 1 / Math.sqrt(2)],
-        [0, -1, 1 / Math.sqrt(2)]
-    ];
-
-
-
-    var gltfLoader = new GLTFLoader();
-    var planet;
-
-    for (i = 0; i < numPlanets; i++) {
-
+      var gltfLoader = new GLTFLoader();
+      var planet;
+      var i;
+      //load all planets to orbit
+      for (i = 0; i < numPlanets; i++) {
         gltfLoader.load(
-            duckModel,
+          newModule.default,
             function (object) {
 
                 planet = new THREE.Group();
-
                 var size = 0.3;
-
                 planet.scale.x = size;
                 planet.scale.y = size;
                 planet.scale.z = size;
-
                 planet.add(object.scene);
-
                 planet.position.set(tetraVerts[counter][0], tetraVerts[counter][1], tetraVerts[counter][2]);
                 //planet.scale.z = 10;
 
@@ -141,8 +122,6 @@ export const getThreeScene = (addObject) => {
                 targetQuaternion.setFromRotationMatrix(rotationMatrix);
 
                 planet.quaternion.copy(targetQuaternion);
-
-
                 planets[i] = planet;
                 orbit.add(planet);
                 counter += 1;
@@ -150,36 +129,60 @@ export const getThreeScene = (addObject) => {
             }
         );
 
-    }
+      }
 
+      //orbitDir holds the orbit and is what scales!!
+      var orbitDir = new THREE.Group();
+      orbitDir.rotation.x = 0;//1.57;
+      orbitDir.add(orbit);
+      orbitDir.name = 'Orbit';
 
-        var orbitDir = new THREE.Group();
-        orbitDir.rotation.x = 0;//1.57;
-        orbitDir.add(orbit);
-        orbitDir.name = 'Orbit';
-
-        //adding particles to redux objects
-        addObject(orbitDir.id, 'Duck', orbitDir.name, TREBLE, 80);        /************ Adding object 3************/
-
-        
-        scene.add(orbitDir);        
+      //adding particles to redux objects
+      addObject(orbitDir.id, 'Duck', orbitDir.name, TREBLE, 80);        /************ Adding object 3************/
+      scene.add(orbitDir); 
+    });
 
 //////////*************Creating Stars******************///////////
-        geometry = new THREE.BufferGeometry();
 
-        
-        var vertices = [];
-        for (var i = 0; i < 500; i++) {
-            vertices.push(THREE.Math.randFloatSpread(200)); // x
-            vertices.push(THREE.Math.randFloatSpread(200)); // y
-            vertices.push(THREE.Math.randFloatSpread(200)); // z
-        }
 
-        geometry.addAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+/*
+    geometry = new THREE.BufferGeometry();
 
-        //adding particles to redux objects
-        //addObject(particles.id, particles.name, BASS, MAXINT);      /************ Adding object 2************/
+    
+    var vertices = [];
+    for (var i = 0; i < 500; i++) {
+        vertices.push(THREE.Math.randFloatSpread(200)); // x
+        vertices.push(THREE.Math.randFloatSpread(200)); // y
+        vertices.push(THREE.Math.randFloatSpread(200)); // z
+    }
 
+    geometry.addAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+*/
+
+  //adding particles to redux objects
+  //addObject(particles.id, particles.name, BASS, MAXINT);      /************ Adding object 2************/
+
+
+      
+  //////////*************Creating Other Scene Lights and Items******************///////////
+  var rotationMatrix = new THREE.Matrix4();
+  var targetQuaternion = new THREE.Quaternion();
+  var origin = new THREE.Vector3(0, 0, 0);
+  var planets = {};
+
+
+  //lights
+  var ambientLight = new THREE.AmbientLight(0xffffff, 5);
+  ambientLight.position.set(-1, -1, -1).normalize();
+  //scene.add(ambientLight);
+
+  var directionalLight = new THREE.DirectionalLight(0xfff1a8, 5);
+  directionalLight.position.set(10, 0, 10).normalize();
+  scene.add(directionalLight);
+
+  directionalLight = new THREE.DirectionalLight(0xfff1a8, 5);
+  directionalLight.position.set(-10, 0, -10).normalize();
+  scene.add(directionalLight);
 
     return scene;
 }

@@ -19,7 +19,6 @@ var elastictranscoder = new aws.ElasticTranscoder({
  */
 router.post( '/create-job', ( req, res ) => {
   console.log("TRANSCODER REQ");
-  console.log(req.body);
   var params = {
     PipelineId: '1580962929795-oqv08g',
     OutputKeyPrefix: 'converted/',
@@ -28,13 +27,25 @@ router.post( '/create-job', ( req, res ) => {
     },
     Output: {
       Key: req.body.outputKey,
-      PresetId: '1351620000001-000001' //Generic 1080p
+      //PresetId: '1351620000001-000001' //Generic 1080p
+      PresetId: '1581306493281-keouoz', //custom keep
     }
   };
 
   elastictranscoder.createJob(params, function(err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
-    else     console.log(data);           // successful response
+    if (err){
+      console.log(err, err.stack); // an error occurred
+      res.json( {
+        data: err
+      } );
+    } 
+    else{
+      console.log('TRANSCORDER SUCCESS');
+      //console.log(data);           // successful response
+      res.json( {
+        data: data
+      } );
+    }
   });
 });
 

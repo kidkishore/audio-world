@@ -9,8 +9,6 @@ import ThreeApp from '../../containers/ThreeApp';
 import AudioMenu from '../../containers/AudioMenu/AudioMenu';
 import SceneMenu from '../../containers/SceneMenu/SceneMenu';
 import AudioPlayer from '../../containers/AudioPlayer/AudioPlayer';
-import VideoRecorder from '../VideoRecorder/VideoRecorder';
-
 import '../../index.css'; 
 import './MainScreen.css'; 
 
@@ -65,7 +63,6 @@ class MainScreen extends Component {
               <i aria-hidden="true" className={this.state.visible ? "options icon menu-on" : "options icon menu-off"}></i>
           </button>
           <AudioPlayer />
-          <VideoRecorder />
         </div>   
       </div>
     )

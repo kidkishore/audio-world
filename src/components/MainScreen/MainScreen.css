@@ -41,22 +41,6 @@
   font-size: 1.5rem  !important;
 }
 
-#recorderButton {
-  display: inline-block;
-  position: relative;
-  width: 3rem;
-  height: 3rem;
-  top: 5px;
-  /*color: #de1d2a;
-  background-color: #000000;
-  border-style: solid;
-  border-color: #de1d2a;
-  border-width: 1px;*/
-}
-
-
-
-
 
 .menu-on {
   transform: rotate(180deg);

@@ -17,22 +17,35 @@ import {
   clearObjectsToEdit
 } from '../actions/sceneActions';
 import { setFrequencies } from '../actions/effectActions';
-import '../index.css'
+import '../index.css';
+import {objects, backgrounds} from '../constants.js';
 import { analyser } from './AudioPlayer/FilePlayer';
 
 
 class ThreeApp extends React.Component {
     
   componentDidMount() {        
-      //Create separate functions for different objects in scene
-      var items = getThreeCameraAndRenderer();
-      this.camera = items[0];
-      this.threeRenderer = items[1];
 
-      //Create the initial scene, camera, and renderer
-      this.scene = getThreeScene(this.props.addObject);
-      this.renderNextFrame();
-      window.addEventListener("resize", this.updateDimensions.bind(this));
+    //Create separate functions for different objects in scene
+    var items = getThreeCameraAndRenderer();
+    this.camera = items[0];
+    this.threeRenderer = items[1];
+
+    const initialBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)].value;
+    const initialCenter = objects[Math.floor(Math.random() * objects.length)].value;
+    const initialOrbit = objects[Math.floor(Math.random() * objects.length)].value;
+
+    //Create the initial scene, camera, and renderer
+    this.scene = getThreeScene(
+      initialBackground,
+      initialCenter,
+      initialOrbit,
+      this.props.addObject
+      );
+
+
+    this.renderNextFrame();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
 
     
   }
@@ -90,7 +103,7 @@ class ThreeApp extends React.Component {
 }
 
 
-/*
+
 ThreeApp.propTypes = {
   sceneState: PropTypes.object,
   frequencies: PropTypes.object,
@@ -101,7 +114,7 @@ ThreeApp.propTypes = {
   clearObjectsToEdit: PropTypes.func,
   setFrequencies: PropTypes.func
 
-}*/
+}
 
 //the ThreeApp uses the sceneState and frequencies
 const mapStateToProps = state => {

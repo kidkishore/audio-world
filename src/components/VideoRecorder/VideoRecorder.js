@@ -19,7 +19,7 @@ class VideoRecorder extends Component {
     this.state = {
       recording: false,
       recorded_file: null,
-      modalIsOpen: true
+      modalIsOpen: false
     }
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
@@ -28,7 +28,7 @@ class VideoRecorder extends Component {
   }
 
   componentDidMount() {  
-    this.recorder = new CanvasRecorder(threeCanvas, 's3_test_7');
+    this.recorder = new CanvasRecorder(threeCanvas);
   }
 
   handleRecord = () => {
@@ -68,10 +68,9 @@ class VideoRecorder extends Component {
   }
 
   formSubmit(){
-    console.log('form data: ')
-    console.log(document.getElementById("user-file-name").value)
-    console.log(document.getElementById("user-email").value)
-    console.log(this.state.recorded_file)
+    var name = document.getElementById("user-file-name").value
+    var email = document.getElementById("user-email").value
+    SendFile(name, email, this.state.recorded_file);
   }
 
   render(){
@@ -83,19 +82,24 @@ class VideoRecorder extends Component {
         right                 : 'auto',
         bottom                : 'auto',
         marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)'
+        transform            
+         : 'translate(-50%, -50%)'
       }
     };
 
     return(
-      <div id='video-recorder'>
-        {this.props.playing && 
-          <button id="recorderButton" onClick={this.handleRecord}>
-            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon" : "video icon"}></i>
-          </button>
-        }{!this.props.playing && 
+      <div className='video-recorder'>
+        {!this.props.playing &&
           <button id="recorderButton" onClick={this.handleRecord} disabled>
-            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon" : "video icon"}></i>
+            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon rt" : "video icon rt"}></i>
+            {this.state.recording && <div className='rt'>Stop Recording</div>}
+            {!this.state.recording && <div className='rt'>Start Recording</div>}
+          </button>
+       }{this.props.playing &&
+          <button id="recorderButton" onClick={this.handleRecord}>
+            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon rt" : "video icon rt"}></i>
+            {this.state.recording && <div className='rt'>Stop Recording</div>}
+            {!this.state.recording && <div className='rt'>Start Recording</div>}
           </button>
         }
         <div className="recordedModal">
