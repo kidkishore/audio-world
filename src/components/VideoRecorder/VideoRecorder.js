@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CanvasRecorder } from '../../containers/CanvasRecorder';
+import { Loader } from 'semantic-ui-react'
 import '../MainScreen/MainScreen.css'
 import { threeCanvas } from '../../threeApp/threeApp';
 import { SendFile } from '../../containers/SendFile';
 import Modal from 'react-modal';
 
 
+
+/*
+{this.state.generatedFile && 
+              <div>
+                <button className="btn"><i className="fa fa-download"></i> Download</button>
+                  Email to send:<br/>
+              <input type="text" id='user-email'/><br/>
+              <br/>
+                <button onClick={this.formSubmit}>
+                  Send Video
+                </button>
+              </div>  
+            } 
+*/
 
 
 Modal.setAppElement('#react-container');
@@ -19,12 +34,16 @@ class VideoRecorder extends Component {
     this.state = {
       recording: false,
       recorded_file: null,
-      modalIsOpen: false
+      modalIsOpen: true,
+      generatedFile: null,
+      loading: false
     }
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.generateFile = this.generateFile.bind(this);
+    this.getFileBack = this.getFileBack.bind(this);
   }
 
   componentDidMount() {  
@@ -42,7 +61,7 @@ class VideoRecorder extends Component {
       const new_file = this.recorder.stop();
       this.setState({ recorded_file: new_file });
       //console.log(this.state.recorded_file);
-
+      
       this.openModal()
       //this.recorder.save('s3_test_1')
       // const new_file = this.recorder.save('s3_test_2')
@@ -51,6 +70,24 @@ class VideoRecorder extends Component {
     }
 
   };
+
+  generateFile(){
+    this.setState({loading: true})
+    var name = document.getElementById("user-file-name").value
+    SendFile(name, this.state.recorded_file, this.getFileBack)
+
+  }
+
+  getFileBack(response){
+    console.log(response);
+    var name = response.data.data.Job.Output.Key
+    var file_name = 'https://audioworld-recordings.s3-us-west-2.amazonaws.com/converted/' + name
+
+    console.log('Generated file link ');
+    this.setState({generatedFile: file_name})
+    this.setState({loading: false})
+    document.getElementById("audioElem").pause()
+  }
 
   
   openModal() {
@@ -64,17 +101,17 @@ class VideoRecorder extends Component {
   }
 
   closeModal() {
+    this.setState({generatedFile: null})
+    console.log('set file to NULL')
     this.setState({modalIsOpen: false});
   }
 
   formSubmit(){
-    var name = document.getElementById("user-file-name").value
     var email = document.getElementById("user-email").value
     SendFile(name, email, this.state.recorded_file);
   }
 
   render(){
-
     const customStyles = {
       content : {
         top                   : '50%',
@@ -82,24 +119,28 @@ class VideoRecorder extends Component {
         right                 : 'auto',
         bottom                : 'auto',
         marginRight           : '-50%',
+        background            : '#383838',
+        color                 : '#ebebeb',
         transform            
          : 'translate(-50%, -50%)'
       }
     };
 
+    const {loading, recording, generatedFile} = this.state;
+
     return(
       <div className='video-recorder'>
         {!this.props.playing &&
           <button id="recorderButton" onClick={this.handleRecord} disabled>
-            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon rt" : "video icon rt"}></i>
-            {this.state.recording && <div className='rt'>Stop Recording</div>}
-            {!this.state.recording && <div className='rt'>Start Recording</div>}
+            <i aria-hidden="true" className={recording ? "stop circle outline icon rt" : "video icon rt"}></i>
+            {recording && <div className='rt'>Stop Recording</div>}
+            {!recording && <div className='rt'>Start Recording</div>}
           </button>
        }{this.props.playing &&
           <button id="recorderButton" onClick={this.handleRecord}>
-            <i aria-hidden="true" className={this.state.recording ? "stop circle outline icon rt" : "video icon rt"}></i>
-            {this.state.recording && <div className='rt'>Stop Recording</div>}
-            {!this.state.recording && <div className='rt'>Start Recording</div>}
+            <i aria-hidden="true" className={recording ? "stop circle outline icon rt" : "video icon rt"}></i>
+            {recording && <div className='rt'>Stop Recording</div>}
+            {!recording && <div className='rt'>Start Recording</div>}
           </button>
         }
         <div className="recordedModal">
@@ -110,16 +151,29 @@ class VideoRecorder extends Component {
             contentLabel="Example Modal"
           >
             <h2>Save Your Recording</h2>
-            <br/>
-            File Name:<br/>
-            <input type="text" id='user-file-name'/><br/>
-            Email to send:<br/>
-            <input type="text" id='user-email'/><br/>
-            <br/>
-            <button onClick={this.formSubmit}>
-              Send Video
-            </button>
-            <button onClick={this.closeModal}>Cancel Recording</button>            
+            <div className='modal-row'>
+              <br/>
+              FILE NAME<br/>
+              <input type="text" id='user-file-name'/><br/>
+            </div>
+            <div className='modal-row'>
+              <button className="modal-button" onClick={this.generateFile}>
+                Generate Video
+              </button>
+              {loading && <div className="loader"></div>}
+              {generatedFile && 
+                <button className="modal-button">
+                  <a href={generatedFile} target="_blank">
+                    View Video
+                  </a>
+                </button>
+              }
+            </div>
+            <div className='modal-row'>
+              <button className="modal-button" onClick={this.closeModal}>
+                Cancel Recording
+              </button>  
+            </div>       
           </Modal>
         </div>
       </div>

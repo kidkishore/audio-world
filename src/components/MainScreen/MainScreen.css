@@ -53,3 +53,33 @@
 .active.item {
   border-radius: 0px !important;
 }
+
+.loader {
+  display: inline-block;
+  border: 6px solid #c0c0c0;
+  border-top: 6px solid #bb0000;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  left: 1rem;
+  top: 11px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal-button{
+  display: inline-block;
+  height: 3rem;
+  width: 11rem;
+  border-radius: 3rem;
+}
+
+.modal-row{
+  text-align: center;
+  margin: 2rem;
+}

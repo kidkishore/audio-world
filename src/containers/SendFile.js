@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const SendFile = (name, email, file ) => {
+export const SendFile = (name, file, callback ) => {
   const data = new FormData();
   console.log('handling file upload: ', file);
 // If file selected
@@ -28,7 +28,7 @@ export const SendFile = (name, email, file ) => {
             // Success
             console.log( 'File upload success');
             var file_name = response.data.image
-            createTranscoderJob(file_name, email);
+            createTranscoderJob(file_name, callback);
           }
         }
       }).catch( ( error ) => {
@@ -41,7 +41,7 @@ export const SendFile = (name, email, file ) => {
   }
 }
 
-const createTranscoderJob = (fileName, email) => {
+const createTranscoderJob = (fileName, callback) => {
 
   var newFileName = fileName + '.mp4';
   console.log('createTranscoderJob on: ', fileName)
@@ -53,7 +53,8 @@ const createTranscoderJob = (fileName, email) => {
 
   axios.post('/api/transcoder/create-job', params)
   .then(function (response) {
-    sendEmail(newFileName, email);
+    console.log(response);
+    callback(response);
   })
   .catch(function (error) {
     console.log(error);
