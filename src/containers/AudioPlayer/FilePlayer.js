@@ -12,7 +12,7 @@ import $ from 'jquery';
 export var audioStream;
 export var analyser;
 
-
+//<VideoRecorder />
 
 class FilePlayer extends Component {
 
@@ -69,7 +69,6 @@ class FilePlayer extends Component {
           <audio id="audioElem" controls >
             <source src="" id="srcElem"/>
           </audio>
-          <VideoRecorder />
         </div>
     );
   }
