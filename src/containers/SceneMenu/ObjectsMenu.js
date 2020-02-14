@@ -28,7 +28,7 @@ class ObjectsMenu extends Component {
               {this.props.objects.map(object => {
                 return(
                   <div key={object.id}>
-                    {object.name !== 'Background' && 
+                    {object.name !== 'Background' && object.name !== 'Text'  && 
                       <div>
                         <Accordion.Title
                           active={activeIndex === object.id}

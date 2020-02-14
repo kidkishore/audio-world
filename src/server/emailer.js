@@ -19,7 +19,7 @@ var ses = new aws.SES({
 
 function getS3File(bucket, key) {
   return new Promise(function (resolve, reject) {
-    console.log(key,'-');
+    console.log(key);
       s3.getObject(
           {
               Bucket: "audioworld-recordings",

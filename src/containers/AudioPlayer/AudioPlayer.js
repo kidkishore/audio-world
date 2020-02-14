@@ -7,6 +7,20 @@ import { streams } from '../../constants.js';
 import './AudioPlayer.css';
 import '../../index.css';
 
+/*
+  <div className='audioDropdown'>
+    Input:
+    <Dropdown
+      className='innerDropdown'
+      floating
+      labeled
+      defaultValue={this.state.stream}
+      onChange={this.streamSelected}
+      options={streams}
+    />
+  </div>
+*/
+
 class AudioPlayer extends Component {
 
     constructor(props) {
@@ -23,17 +37,6 @@ class AudioPlayer extends Component {
     render() {
         return (
             <div className='soundControls'>
-              <div className='audioDropdown'>
-                Input:
-                <Dropdown
-                  className='innerDropdown'
-                  floating
-                  labeled
-                  defaultValue={this.state.stream}
-                  onChange={this.streamSelected}
-                  options={streams}
-                />
-              </div>
                 { this.state.stream == 'FILE' &&
                   <FilePlayer/>
                 }

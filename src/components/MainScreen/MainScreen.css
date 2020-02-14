@@ -62,9 +62,9 @@
   width: 30px;
   height: 30px;
   animation: spin 2s linear infinite;
-  position: relative;
-  left: 1rem;
-  top: 11px;
+  position: absolute;
+  left: 19rem;
+  top: 12.4rem;
 }
 
 @keyframes spin {

@@ -34,7 +34,7 @@ class VideoRecorder extends Component {
     this.state = {
       recording: false,
       recorded_file: null,
-      modalIsOpen: true,
+      modalIsOpen: false,
       generatedFile: null,
       loading: false
     }
@@ -79,9 +79,9 @@ class VideoRecorder extends Component {
   }
 
   getFileBack(response){
-    console.log(response);
-    var name = response.data.data.Job.Output.Key
-    var file_name = 'https://audioworld-recordings.s3-us-west-2.amazonaws.com/converted/' + name
+    //console.log(response);
+    //var name = response.data.data.Job.Output.Key
+    var file_name = 'https://audioworld-recordings.s3-us-west-2.amazonaws.com/converted/' + response
 
     console.log('Generated file link ');
     this.setState({generatedFile: file_name})
@@ -102,7 +102,6 @@ class VideoRecorder extends Component {
 
   closeModal() {
     this.setState({generatedFile: null})
-    console.log('set file to NULL')
     this.setState({modalIsOpen: false});
   }
 

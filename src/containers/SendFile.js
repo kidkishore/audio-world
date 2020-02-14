@@ -54,7 +54,7 @@ const createTranscoderJob = (fileName, callback) => {
   axios.post('/api/transcoder/create-job', params)
   .then(function (response) {
     console.log(response);
-    callback(response);
+    callback(newFileName);
   })
   .catch(function (error) {
     console.log(error);

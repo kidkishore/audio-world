@@ -47,7 +47,6 @@ export function CanvasRecorder(canvas) {
       //console.log('video stream in recorder: ', stream);
       //
       if(audioStream && audioStream.getAudioTracks()[0]){
-        console.log('audio stream in recorder: ', audioStream);
         stream.addTrack(audioStream.getAudioTracks()[0]);
       }
       //console.log('combined in recorder: ', stream);
