@@ -44,9 +44,6 @@ class App extends Component {
           <title>AudioWorld.io: Visualizing your music in new ways.</title>
         </Helmet>
         <Favicon url={favicon} />
-        <MetaTags>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        </MetaTags>
         <Provider store={store}>
           <Navbar />
           <Route path="/" exact component={MainScreen} />
