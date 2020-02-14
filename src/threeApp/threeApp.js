@@ -8,19 +8,24 @@ export var threeCanvas;
 //INITIAL CAMERA AND RENDERER
 export const getThreeCameraAndRenderer = () => {
     const bottomNavigation = 0;
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight-bottomNavigation), 0.01, 1500);
+    const camera = new THREE.PerspectiveCamera(75, window.visualViewport.width / (window.visualViewport.height-bottomNavigation), 0.01, 1500);
     camera.position.y = 0.2;
     camera.position.z = 5;
 
     const container = document.getElementById('container');
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight-bottomNavigation);
+    renderer.setSize(window.visualViewport.height, window.visualViewport.height-bottomNavigation);
     container.appendChild(renderer.domElement);
     threeCanvas = renderer.domElement;
 
     var controls = new OrbitControls(camera, renderer.domElement);
 
+    console.log(window.visualViewport.width)
+    console.log(window.visualViewport.height)
+
     return [camera, renderer, controls];
+
+
 }
 
 const loadObj = (objName, name, url, scene, addObject) => {
@@ -70,7 +75,7 @@ export const getThreeScene = (initialBackground, initialCenter, initialOrbit, ad
       scene.add(parent);
       parent.add(mesh);
       addObject(parent.id, 'Space', parent.name, BASS, 200);
-      addText(scene, addObject);
+      //addText(scene, addObject);
 
     });
 
@@ -262,7 +267,7 @@ const addText = (scene, addObject) => {
          bevelSize: 0.01
         } ); 
 
-        var textGeometry3 = new THREE.TextGeometry( 'BEPISE MAN', 
+        var textGeometry3 = new THREE.TextGeometry( 'VELVEETA', 
       {
          font: font, 
          size: 0.3, 
@@ -309,8 +314,8 @@ const addText = (scene, addObject) => {
      group.name = 'Text';
 
 
-     //scene.add( group );
-     //addObject(group.id, 'Text', group.name, -1 , 200);
+     scene.add( group );
+     addObject(group.id, 'Text', group.name, -1 , 200);
 
   } 
 

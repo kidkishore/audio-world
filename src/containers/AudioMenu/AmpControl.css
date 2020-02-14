@@ -13,3 +13,18 @@
 .volSlider {
 	margin: auto;
 }
+
+@media (max-width : 420px) {
+  .on-mobile {
+    color: white;
+    display:block;
+  }
+}
+
+@media (min-width : 420px) {
+  .on-mobile {
+    color: white;
+    display:none;
+  }
+}
+

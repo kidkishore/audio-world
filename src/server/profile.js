@@ -12,7 +12,8 @@ const router = express.Router();
 const s3 = new aws.S3({
 	accessKeyId: 'AKIA3NHG3WYRJH3VFP57',
 	secretAccessKey: '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',
-	Bucket: 'audioworld-recordings'
+  Bucket: 'audioworld-recordings',
+  region : 'us-west-2'
 });
 
 /**

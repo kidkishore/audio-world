@@ -126,4 +126,8 @@
   left: -8px;
 }
 
+@media (max-width : 320px) {
+  .soundControls {display:none;}
+}
+
 

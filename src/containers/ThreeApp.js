@@ -27,6 +27,7 @@ class ThreeApp extends React.Component {
   componentDidMount() {        
 
     //Create separate functions for different objects in scene
+    window.addEventListener("resize", this.updateDimensions.bind(this));
     var items = getThreeCameraAndRenderer();
     this.camera = items[0];
     this.threeRenderer = items[1];
@@ -45,7 +46,6 @@ class ThreeApp extends React.Component {
 
 
     this.renderNextFrame();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
 
     
   }
@@ -86,9 +86,9 @@ class ThreeApp extends React.Component {
   updateDimensions = () => {
       const bottomNavigation = 0;
       if (this.threeRenderer)
-          this.threeRenderer.setSize(window.innerWidth, window.innerHeight-bottomNavigation);
+          this.threeRenderer.setSize( window.visualViewport.width,  window.visualViewport.height-bottomNavigation);
       if (this.camera) {
-          this.camera.aspect = window.innerWidth / (window.innerHeight-bottomNavigation);
+          this.camera.aspect =  window.visualViewport.width / ( window.visualViewport.height-bottomNavigation);
           this.camera.updateProjectionMatrix();
       }
   }

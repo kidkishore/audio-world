@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Favicon from 'react-favicon';
 import store from './store';
 import favicon from './models/favicon.png';
+import MetaTags from 'react-meta-tags';
 
 
 class App extends Component {
@@ -19,6 +20,9 @@ class App extends Component {
           <title>AudioWorld.io: Visualizing your music in new ways.</title>
         </Helmet>
         <Favicon url={favicon} />
+        <MetaTags>
+            <meta name="viewport" content="width=device-width" />
+        </MetaTags>
         <Provider store={store}>
           <Navbar />
           <Route path="/" exact component={MainScreen} />
