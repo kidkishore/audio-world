@@ -10,6 +10,20 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase !important;
 }
 
+
+@media (max-width : 420px) {
+  .aboutPath{
+    display: block;
+  }
+}
+
+@media (min-width : 420px) {
+  .aboutPath {
+    display:none;
+  }
+}
+
+
 .sideMenu {
     /*position: absolute;
     background: white;

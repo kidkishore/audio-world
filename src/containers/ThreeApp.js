@@ -44,6 +44,8 @@ class ThreeApp extends React.Component {
       this.props.addObject
       );
 
+    this.updateDimensions();
+
 
     this.renderNextFrame();
 

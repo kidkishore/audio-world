@@ -10,10 +10,34 @@ import Favicon from 'react-favicon';
 import store from './store';
 import favicon from './models/favicon.png';
 import MetaTags from 'react-meta-tags';
+import './index.css';
 
 
 class App extends Component {
+
+  constructor(props){
+    super(props)
+
+    console.log('app loading')
+    console.log(window.visualViewport.width)
+
+    this.state = {
+      mobile: true
+    }
+
+  }
+
+  componentDidMount(){
+    if(window.visualViewport.width < 420){
+      this.setState({mobile: false})
+    }
+
+  }
+
+
+
   render() {
+    console.log('is mobile?: ', this.state.mobile)
 		return(
       <Router>
         <Helmet>
@@ -26,7 +50,7 @@ class App extends Component {
         <Provider store={store}>
           <Navbar />
           <Route path="/" exact component={MainScreen} />
-          <Route path="/about" component={About} />
+          {!this.state.mobile && <Route path="/about" component={About} />}
         </Provider>
       </Router>
 		);
