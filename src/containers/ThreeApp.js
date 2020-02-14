@@ -88,7 +88,7 @@ class ThreeApp extends React.Component {
   updateDimensions = () => {
       const bottomNavigation = 0;
 
-      if (this.camera && this.threeRenderer) {
+      if (this.camera && this.threeRenderer && (window.visualViewport.width > 420)) {
         this.threeRenderer.setSize( window.visualViewport.width,  window.visualViewport.height-bottomNavigation);
         this.camera.aspect =  window.visualViewport.width / ( window.visualViewport.height-bottomNavigation);
         this.camera.updateProjectionMatrix();

@@ -14,14 +14,12 @@ export const getThreeCameraAndRenderer = () => {
 
     const container = document.getElementById('container');
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.visualViewport.height, window.visualViewport.height-bottomNavigation);
+    renderer.setSize(window.visualViewport.width, window.visualViewport.height-bottomNavigation);
     container.appendChild(renderer.domElement);
     threeCanvas = renderer.domElement;
 
     var controls = new OrbitControls(camera, renderer.domElement);
 
-    console.log(window.visualViewport.width)
-    console.log(window.visualViewport.height)
 
     return [camera, renderer, controls];
 
