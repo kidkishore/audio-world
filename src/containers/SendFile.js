@@ -18,15 +18,15 @@ export const SendFile = (name, file, callback ) => {
           // If file size is larger than expected.
           if( response.data.error ) {
             if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
-              console.log( 'Max size: 25MB');
+              //console.log( 'Max size: 25MB');
             } else {
-              console.log( response.data );
+              //console.log( response.data );
 // If not the given file type
-              console.log( response.data.error);
+              //console.log( response.data.error);
             }
           } else {
             // Success
-            console.log( 'File upload success');
+            //console.log( 'File upload success');
             var file_name = response.data.image
             createTranscoderJob(file_name, callback);
           }
@@ -37,14 +37,14 @@ export const SendFile = (name, file, callback ) => {
     });
   } else {
     // if file not selected throw error
-    console.log( 'Please upload file' );
+    //console.log( 'Please upload file' );
   }
 }
 
 const createTranscoderJob = (fileName, callback) => {
 
   var newFileName = fileName + '.mp4';
-  console.log('createTranscoderJob on: ', fileName)
+ // console.log('createTranscoderJob on: ', fileName)
 
   var params = {
     inputKey: fileName,
@@ -53,17 +53,17 @@ const createTranscoderJob = (fileName, callback) => {
 
   axios.post('/api/transcoder/create-job', params)
   .then(function (response) {
-    console.log(response);
+    //console.log(response);
     callback(newFileName);
   })
   .catch(function (error) {
-    console.log(error);
+    //console.log(error);
   });
 }
 
 const sendEmail = (fileName, email) => {
-  console.log("Transcoding success: ",fileName);
-  console.log('email to send: ', email);
+  //console.log("Transcoding success: ",fileName);
+  //console.log('email to send: ', email);
 
   const params = {
     fileName: 'converted/' + fileName,
@@ -72,10 +72,10 @@ const sendEmail = (fileName, email) => {
 
   axios.post('/api/emailer/send-email', params)
   .then(function (response) {
-    console.log('Email send success!!')
+    //console.log('Email send success!!')
   })
   .catch(function (error) {
-    console.log(error);
+    //console.log(error);
   });
 
 
