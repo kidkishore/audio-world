@@ -82,6 +82,7 @@ class ObjectControls extends Component {
               defaultValue={object.value}
               options={objects}
               onChange={this.objectSelected}
+              scrolling
             />
           </div>
           <div className='inputField'>

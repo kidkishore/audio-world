@@ -182,7 +182,7 @@ export const getThreeScene = (initialBackground, initialCenter, initialOrbit, ad
 
 
   //lights
-  var ambientLight = new THREE.AmbientLight(0xffffff, 5);
+  var ambientLight = new THREE.AmbientLight(0xffffff, 15);
   ambientLight.position.set(-1, -1, -1).normalize();
   //scene.add(ambientLight);
 

@@ -15,39 +15,21 @@ import './index.css';
 
 class App extends Component {
 
-  constructor(props){
-    super(props)
-
-    console.log('app loading')
-    console.log(window.visualViewport.width)
-
-    this.state = {
-      mobile: true
-    }
-
-  }
-
-  componentDidMount(){
-    if(window.visualViewport.width < 420){
-      this.setState({mobile: false})
-    }
-
-  }
-
-
 
   render() {
-    console.log('is mobile?: ', this.state.mobile)
 		return(
       <Router>
         <Helmet>
           <title>AudioWorld.io: Visualizing your music in new ways.</title>
         </Helmet>
+        <MetaTags>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        </MetaTags>
         <Favicon url={favicon} />
         <Provider store={store}>
           <Navbar />
           <Route path="/" exact component={MainScreen} />
-          {!this.state.mobile && <Route path="/about" component={About} />}
+          <Route path="/about" component={About} />
         </Provider>
       </Router>
 		);

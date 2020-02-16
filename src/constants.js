@@ -99,13 +99,13 @@ export const sceneDetail = {
   },
   Munnar: {
     Background: 'munnar.JPG',
-    Center: 'DamagedHelmet.glb',
+    Center: 'Helmet.glb',
     Orbit: 'BrainStem.glb'
   },
   Goomba: {
     Background: 'snow.jpg',
     Center: 'Creature.glb',
-    Orbit: 'Plumber.glb'
+    Orbit: 'Speaker.glb'
   },
 
 };
@@ -118,13 +118,13 @@ export const objects = [
   },
   {
     key: 1,
-    text: 'Duck',
-    value: 'Duck',
+    text: 'Pineapple',
+    value: 'Pineapple',
   },
   {
     key: 2,
-    text: 'Pineapple',
-    value: 'Pineapple',
+    text: 'BrainStem',
+    value: 'BrainStem',
   },
   {
     key: 3,
@@ -133,13 +133,13 @@ export const objects = [
   },
   {
     key: 4,
-    text: 'DamagedHelmet',
-    value: 'DamagedHelmet',
+    text: 'Helmet',
+    value: 'Helmet',
   },
   {
     key: 5,
-    text: 'BrainStem',
-    value: 'BrainStem',
+    text: 'Duck',
+    value: 'Duck',
   },
   {
     key: 6,
@@ -151,7 +151,16 @@ export const objects = [
     text: 'Plumber',
     value: 'Plumber',
   },
-
+  {
+    key: 8,
+    text: 'Cesium',
+    value: 'Cesium',
+  },
+  {
+    key: 9,
+    text: 'Speaker',
+    value: 'Speaker',
+  }
 ];
 
 export const streams = [

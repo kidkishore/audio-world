@@ -33,8 +33,8 @@ class ThreeApp extends React.Component {
     this.threeRenderer = items[1];
 
     const initialBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)].value;
-    const initialCenter = objects[Math.floor(Math.random() * objects.length)].value;
-    const initialOrbit = objects[Math.floor(Math.random() * objects.length)].value;
+    const initialCenter = objects[Math.floor(Math.random() * (objects.length-3)+3)].value;
+    const initialOrbit = objects[Math.floor(Math.random() * (objects.length-3)+3)].value;
 
     //Create the initial scene, camera, and renderer
     this.scene = getThreeScene(
