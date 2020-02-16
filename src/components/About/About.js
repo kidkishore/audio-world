@@ -15,7 +15,7 @@ class About extends Component {
           <ScrollAnimation animateIn="fadeIn">
             <div className='mainContent'>
                 Audioworld brings a whole new experience to enjoying your music.
-                Simply upload a song file to get started with your own audio visualization.
+                Simply upload a song file through your desktop to get started with your own audio visualization.
             </div>
           </ScrollAnimation>
       </div>

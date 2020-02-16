@@ -1,25 +1,64 @@
 .aboutMain {
   z-index: -2;
   background-image: url(../../img/background_red_1.jpeg);
-  position: absolute;
   height: 100%;
-}
-.aboutContent {
-  color: white;
-  margin-top: 20rem;
-  position: relative;
+  background-size: auto;
 }
 
-.mainHeader {
-  color: white;
-  font-size: 5rem;
-  margin: 4rem;
-  line-height: 5rem;
+
+/* Desktop */
+
+@media (min-width : 420px) {
+  .aboutContent {
+    color: white;
+    margin-top: 20rem;
+    position: relative;
+  }
+  
+  .mainHeader {
+    color: white;
+    font-size: 5rem;
+    margin: 4rem;
+    line-height: 5rem;
+  }
+  
+  .mainContent {
+    margin: 4rem;
+    font-size: 2rem;
+    line-height: 35px;
+    width: 50%;
+  }
 }
 
-.mainContent {
-  margin: 4rem;
-  font-size: 2rem;
-  line-height: 35px;
-  width: 50%;
+
+/* Mobile */
+@media (max-width : 420px) {
+
+  .aboutMain{
+    background-size: 500px 500px;
+    height: 1000px;
+  }
+
+  .aboutContent {
+    color: white;
+    margin-top: 8rem;
+    position: relative;
+  }
+  
+  .mainHeader {
+    color: white;
+    font-size: 36px;
+    margin: 4rem 2rem;
+    line-height: 45px;
+  }
+  
+  .mainContent {
+    color: lightgray;
+    margin: 2rem 4rem;
+    font-size: 23px;
+    line-height: 35px;
+    width: 75%;
+    text-align: right;
+  }
 }
+
