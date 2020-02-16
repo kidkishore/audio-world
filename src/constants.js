@@ -105,7 +105,7 @@ export const sceneDetail = {
   Goomba: {
     Background: 'snow.jpg',
     Center: 'Creature.glb',
-    Orbit: 'Speaker.glb'
+    Orbit: 'speaker.glb'
   },
 
 };
@@ -159,7 +159,7 @@ export const objects = [
   {
     key: 9,
     text: 'Speaker',
-    value: 'Speaker',
+    value: 'speaker',
   }
 ];
 
