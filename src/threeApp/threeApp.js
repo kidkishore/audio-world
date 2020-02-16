@@ -8,13 +8,25 @@ export var threeCanvas;
 //INITIAL CAMERA AND RENDERER
 export const getThreeCameraAndRenderer = () => {
     const bottomNavigation = 0;
-    const camera = new THREE.PerspectiveCamera(75, window.visualViewport.width / (window.visualViewport.height-bottomNavigation), 0.01, 1500);
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    const screenWidth = screen.width;
+    console.log('width, height: ', width, height)
+    console.log('screenWidth: ', screenWidth)
+
+    if(screenWidth < 420){
+      width = screen.width;
+      height = screen.height;
+    }
+
+    const camera = new THREE.PerspectiveCamera(75, width / (height-bottomNavigation), 0.01, 1500);
     camera.position.y = 0.2;
     camera.position.z = 5;
 
     const container = document.getElementById('container');
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.visualViewport.width, window.visualViewport.height-bottomNavigation);
+    renderer.setSize(width , height -bottomNavigation);
     container.appendChild(renderer.domElement);
     threeCanvas = renderer.domElement;
 
