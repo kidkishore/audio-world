@@ -83,25 +83,6 @@ export function CanvasRecorder(canvas) {
   function download() {
       const name =  'recording.webm';
       const blob = new Blob(recordedBlobs, {type: supportedType} );
-      //console.log('the blob: ', blob)
-      //blob.name = name
-      //blob.lastModifiedDate = new Date();
-      //return blob
       return new File([blob], name)
-
-      blob.name = name
-      blob.lastModifiedDate = new Date();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = name;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => {
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-      }, 100);
-      
   }
 }

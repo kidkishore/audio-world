@@ -33,10 +33,6 @@ class MainScreen extends Component {
   render() {
     const { visible, mobile } = this.state;
 
-
-    
-    const scene_tag = <div className='tabItem'>Scene</div>;
-    const audio_tag = <div className='tabItem'>Audio</div>;
     var panes = [
       { key: 1,  menuItem: 'SCENE', pane: {key:1, content: <SceneMenu/>}},
       { key: 2, menuItem: 'AUDIO', pane: {key:2, content: <AudioMenu/>}}

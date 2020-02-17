@@ -8,7 +8,7 @@ class AudioMenu extends Component {
     return (
         <div>
           <FrequencyViz/>  
-          <div className='on-mobile'>Uploading audio files not supported on mobile devices</div>
+          <div className='on-mobile'>Please use a desktop or laptop to visualize music! Uploading audio files not supported on mobile devices.</div>
           <AmpControl/>
         </div>
       );

@@ -24,7 +24,7 @@ export default class Navbar extends Component {
           </Link>
         </div>
         <div className="navItemLeft">
-          <Link to="/about" style={linkStyle}>About</Link>
+          <Link to="/about">About</Link>
         </div>
       </div>
     );

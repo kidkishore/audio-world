@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CanvasRecorder } from '../../containers/CanvasRecorder';
-import { Loader } from 'semantic-ui-react'
 import '../MainScreen/MainScreen.css'
 import { threeCanvas } from '../../threeApp/threeApp';
 import { SendFile } from '../../containers/SendFile';
@@ -79,11 +78,7 @@ class VideoRecorder extends Component {
   }
 
   getFileBack(response){
-    //console.log(response);
-    //var name = response.data.data.Job.Output.Key
     var file_name = 'https://audioworld-recordings.s3-us-west-2.amazonaws.com/converted/' + response
-
-    console.log('Generated file link ');
     this.setState({generatedFile: file_name})
     this.setState({loading: false})
     document.getElementById("audioElem").pause()
