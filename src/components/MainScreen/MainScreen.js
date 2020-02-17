@@ -18,7 +18,12 @@ class MainScreen extends Component {
     super(props)
 
     this.state = {
-      visible: false
+      visible: false,
+      mobile: false
+    }
+
+    if(screen.width < 420){
+      this.state.mobile = true;
     }
   }
 
@@ -26,13 +31,18 @@ class MainScreen extends Component {
 
  
   render() {
-    const { visible } = this.state;
+    const { visible, mobile } = this.state;
 
 
-    const panes = [
-      { key: 1, menuItem: 'AUDIO', pane: {key:1, content: <AudioMenu/>}},
-      { key: 2,  menuItem: 'SCENE', pane: {key:2, content: <SceneMenu/>}},
+    
+    const scene_tag = <div className='tabItem'>Scene</div>;
+    const audio_tag = <div className='tabItem'>Audio</div>;
+    var panes = [
+      { key: 1,  menuItem: 'SCENE', pane: {key:1, content: <SceneMenu/>}},
+      { key: 2, menuItem: 'AUDIO', pane: {key:2, content: <AudioMenu/>}}
     ];
+
+
 
     return (
         <div className='mainScreen'>
@@ -44,6 +54,7 @@ class MainScreen extends Component {
               inverted
               onHide={this.handleSidebarHide}
               vertical
+              direction={mobile ? 'right' : 'left'}
               visible={visible}
               width='wide'
               className='sideBar'
@@ -58,11 +69,11 @@ class MainScreen extends Component {
           </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        <div className='bottomBar'>
-          <button className="barButton" onClick={this.handleClick} >
-              <i aria-hidden="true" className={this.state.visible ? "options icon menu-on" : "options icon menu-off"}></i>
+        <div className={mobile ? "bottomBar mobile" : "bottomBar desktop"}>
+          <button className={mobile ? "barButton mobile" : "barButton desktop"} onClick={this.handleClick} >
+              <i aria-hidden="true" className={visible ? "options icon menu-on" : "options icon menu-off"}></i>
           </button>
-          <AudioPlayer />
+          {mobile && <AudioPlayer />}
         </div>   
       </div>
     )

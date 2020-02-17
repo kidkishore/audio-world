@@ -15,14 +15,15 @@
 }
 
 .navItemLeft {
-  color: white;
+  color: '#de1d2a';
   margin: 2rem;
   vertical-align: middle;
   display: inline-block; 
   float: right; 
 }
 
-.active.item {
-  
+@media (max-width : 420px) {
+  .navItemLeft{
+    display: none;
+  }
 }
-

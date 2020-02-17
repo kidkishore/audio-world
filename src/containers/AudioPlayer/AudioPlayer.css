@@ -125,11 +125,11 @@
   left: -8px;
 }
 
-@media (max-width : 320px) {
+@media (max-width : 420px) {
   .soundControls {display:none;}
 }
 
-@media (min-width : 320px) {
+@media (min-width : 420px) {
   .soundControls {display:inline-block;}
 }
 

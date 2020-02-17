@@ -23,6 +23,7 @@ class ScenesMenu extends Component {
           placeholder='Select Scene'
           fluid
           selection
+          scrolling={false}
           options={scenes}
           onChange={this.changeScene}
         />

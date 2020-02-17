@@ -16,10 +16,6 @@ export default class Navbar extends Component {
       position: "relative"
     }
     
-    var linkStyle = {
-      color: '#de1d2a',
-    }
-
     return (
       <div className="navBar">
         <div className="navItem">

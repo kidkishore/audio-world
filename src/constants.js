@@ -43,23 +43,23 @@ export const responses = [
 export const scenes = [
   {
     key: '0',
-    text: 'World',
-    value: 'World',
-  },
-  {
-    key: '1',
-    text: 'Pineapple',
-    value: 'Pineapple',
-  },
-  {
-    key: '2',
     text: 'Goomba',
     value: 'Goomba',
   },
   {
-    key: '3',
+    key: '1',
     text: 'Munnar',
     value: 'Munnar',
+  },
+  {
+    key: '2',
+    text: 'World',
+    value: 'World',
+  },
+  {
+    key: '3',
+    text: 'Pineapple',
+    value: 'Pineapple',
   }
 ]
 

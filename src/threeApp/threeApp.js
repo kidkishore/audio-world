@@ -12,8 +12,8 @@ export const getThreeCameraAndRenderer = () => {
     var width = window.innerWidth;
     var height = window.innerHeight;
     const screenWidth = screen.width;
-    console.log('width, height: ', width, height)
-    console.log('screenWidth: ', screenWidth)
+    //console.log('width, height: ', width, height)
+    //console.log('screenWidth: ', screenWidth)
 
     if(screenWidth < 420){
       width = screen.width;

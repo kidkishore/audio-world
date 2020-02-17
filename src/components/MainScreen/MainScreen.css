@@ -1,7 +1,14 @@
 .showAudio {
   display: block;
   position: relative;
-  top: 80px;
+  top: 77px;
+}
+
+a.active.item {
+  border-radius: 0px;
+  color: white;
+  border: 0.5px solid white;
+  padding: 1rem;
 }
 
 .hidden {
@@ -15,7 +22,16 @@
 }
 
 
-.bottomBar {
+.bottomBar.mobile {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  float: left;
+  height: 4rem;
+}
+
+
+.bottomBar.desktop {
   position: absolute;
   bottom: 0px;
   width: 100%;
@@ -24,7 +40,24 @@
   background-color: black;
 }
 
-.barButton {
+
+
+
+.barButton.mobile {
+  position: absolute;
+  z-index: 2;
+  right: 0px;
+  height: 76px;
+  width: 76px;  
+  color: #9e0812;
+  border-style: solid;
+  border-color: #9e0812;
+  border-width: 1px;
+  background-color: rgba(0, 0, 0, 0);;
+  outline-color: none;
+}
+
+.barButton.desktop {
   float: left;
   height: 4rem;
   width: 4rem;
@@ -34,6 +67,8 @@
   border-color: #de1d2a;
   border-width: 1px;
 }
+
+
 
 
 .options {

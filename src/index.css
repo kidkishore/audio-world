@@ -46,6 +46,10 @@ h1, h2, h3, h4, h5, h6 {
     background: black;
 }
 
+.sideBar.menu {
+  background: rgba(50, 50, 50, 0.0) !important;
+}
+
 .appPushable, .ui.bottom.attached.segment.active.tab, .ui.visible.left.sidebar {
     background: rgba(50, 50, 50, 0.5) !important;
 }
