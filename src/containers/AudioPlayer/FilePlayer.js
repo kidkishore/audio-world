@@ -68,6 +68,7 @@ class FilePlayer extends Component {
           <audio id="audioElem" controls >
             <source src="" id="srcElem"/>
           </audio>
+          <VideoRecorder />
         </div>
     );
   }
