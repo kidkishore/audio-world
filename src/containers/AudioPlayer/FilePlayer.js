@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { setFrequencies, playPause } from '../../actions/effectActions';
-//import VideoRecorder from '../../components/VideoRecorder/VideoRecorder';
+import VideoRecorder from '../../components/VideoRecorder/VideoRecorder';
 import './AudioPlayer.css';
 import '../../index.css';
 import 'babel-polyfill';
@@ -12,7 +12,6 @@ import $ from 'jquery';
 export var audioStream;
 export var analyser;
 
-//<VideoRecorder />
 
 class FilePlayer extends Component {
 

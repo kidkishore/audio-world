@@ -69,7 +69,7 @@ class MainScreen extends Component {
           <button className={mobile ? "barButton mobile" : "barButton desktop"} onClick={this.handleClick} >
               <i aria-hidden="true" className={visible ? "options icon menu-on" : "options icon menu-off"}></i>
           </button>
-          {mobile && <AudioPlayer />}
+          {!mobile && <AudioPlayer />}
         </div>   
       </div>
     )
