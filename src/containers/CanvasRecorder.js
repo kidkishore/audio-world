@@ -40,7 +40,7 @@ export function CanvasRecorder(canvas) {
       }
       let options = { 
           mimeType :  supportedType,
-          videoBitsPerSecond: 4584000 // 3.5kbps
+          videoBitsPerSecond: 6584000 // 3.5kbps
       };
 
       recordedBlobs = [];
