@@ -118,3 +118,9 @@ a.active.item {
   text-align: center;
   margin: 2rem;
 }
+
+.loading-message{
+  position: absolute;
+  left: 98px;
+  bottom: 95px;
+}

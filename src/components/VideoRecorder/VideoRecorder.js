@@ -98,6 +98,8 @@ class VideoRecorder extends Component {
   closeModal() {
     this.setState({generatedFile: null})
     this.setState({modalIsOpen: false});
+    this.setState({loading: false});
+    this.setState({recorded_file: null});
   }
 
   formSubmit(){
@@ -121,6 +123,11 @@ class VideoRecorder extends Component {
     };
 
     const {loading, recording, generatedFile} = this.state;
+
+    const loadingItem = <div>
+      <div className="loader"></div>
+      <div className="loading-message">this will take a minute...</div>
+    </div>
 
     return(
       <div className='video-recorder'>
@@ -154,7 +161,7 @@ class VideoRecorder extends Component {
               <button className="modal-button" onClick={this.generateFile}>
                 Generate Video
               </button>
-              {loading && <div className="loader"></div>}
+              {loading && loadingItem}
               {generatedFile && 
                 <button className="modal-button">
                   <a href={generatedFile} target="_blank">
