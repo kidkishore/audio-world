@@ -15,11 +15,14 @@
 }
 
 .navItemLeft {
-  color: '#de1d2a';
   margin: 2rem;
   vertical-align: middle;
   display: inline-block; 
   float: right; 
+}
+
+.link{
+  color: '#de1d2a';
 }
 
 @media (max-width : 420px) {
