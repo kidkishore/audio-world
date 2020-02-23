@@ -4,18 +4,23 @@ import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import './SceneMenu.css';
-import { changeScene } from '../../actions/sceneActions.js';
-import { scenes } from '../../constants.js';
+import {
+  editCenter,
+  editBackground,
+  editOrbit,
+} from '../../actions/sceneActions.js';
+import { scenes, sceneDetail } from '../../constants.js';
 
 class ScenesMenu extends Component {
 
   changeScene = (e, obj) => {
-    this.props.changeScene(obj.value);
+    const {Background, Center, Orbit} = sceneDetail[obj.value];
+    this.props.editBackground(Background, this.props.background.id)
+    this.props.editCenter(Center, this.props.center.id, this.props.center.response, this.props.center.responseDamp)
+    this.props.editOrbit(Orbit, this.props.orbit.id, this.props.orbit.response, this.props.orbit.responseDamp)
   };
 
-
-    render() {  
-    
+  render() {  
     return (
       <div className="objectsAccordian">
         Current Scene:
@@ -27,23 +32,34 @@ class ScenesMenu extends Component {
           options={scenes}
           onChange={this.changeScene}
         />
-
-          
-       </div>
-      );
-    }
-
+      </div>
+    );
+  }
 }
 
-ScenesMenu.propTypes ={
-  changeScene: PropTypes.func
+ScenesMenu.propTypes = {
+  editOrbit: PropTypes.func,
+  editCenter: PropTypes.func,
+  editBackground: PropTypes.func,
+  orbit: PropTypes.object,
+  center: PropTypes.object,
+  background: PropTypes.object
 }
 
-const mapDispatch = (dispatch) => {
+const mapStateToProps = state => {
   return {
-    changeScene: bindActionCreators(changeScene, dispatch)
+      orbit: state.scene.orbit,
+      center: state.scene.center,
+      background: state.scene.background,
   };
 };
 
+const mapDispatch = (dispatch) => {
+  return {
+    editCenter: bindActionCreators(editCenter, dispatch),
+    editBackground: bindActionCreators(editBackground, dispatch),
+    editOrbit: bindActionCreators(editOrbit, dispatch)
+  };
+};
 
-export default connect(null,mapDispatch)(ScenesMenu);
+export default connect(mapStateToProps,mapDispatch)(ScenesMenu);

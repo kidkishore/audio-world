@@ -56,3 +56,9 @@
 .sceneOptions {
   margin-bottom: 1rem;
 }
+
+.objectTitle {
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 16px;
+}

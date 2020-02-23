@@ -24,21 +24,7 @@ const initialState = {
     }
   },
   scene: {
-    timestamp: 0,
-    name: null,
-    objects: [],
-    objectsToRemove: [],
-    objectsToEdit: [],
-    scenes: [
-      {
-        id: 0,
-        name: 'The World'
-      },
-      {
-        id: 1,
-        name: 'The Wave'
-      }
-    ]
+    timestamp: 0
   }
 }
 

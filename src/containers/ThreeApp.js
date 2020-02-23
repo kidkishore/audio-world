@@ -12,14 +12,17 @@ import {
 import {bindActionCreators} from 'redux';
 import { mapStateToScene } from '../reducers/stateToScene';
 import {
-  addObject,
-  clearObjectsToRemove,
-  clearObjectsToEdit
+  addBackground,
+  addCenter,
+  addOrbit,
+  addText
 } from '../actions/sceneActions';
 import { setFrequencies } from '../actions/effectActions';
 import '../index.css';
 import {objects, backgrounds} from '../constants.js';
 import { analyser } from './AudioPlayer/FilePlayer';
+import {BASS, LOMID, TREBLE} from '../constants';
+
 
 
 class ThreeApp extends React.Component {
@@ -35,8 +38,9 @@ class ThreeApp extends React.Component {
     const initialBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)].value;
     const initialCenter = objects[Math.floor(Math.random() * (objects.length-3)+3)].value;
     const initialOrbit = objects[Math.floor(Math.random() * (objects.length-3)+3)].value;
-
+    const initialText = ['audioworld.io', 'audioworld.io','audioworld.io']
     //Create the initial scene, camera, and renderer
+
     this.scene = getThreeScene(
       initialBackground,
       initialCenter,
@@ -44,6 +48,11 @@ class ThreeApp extends React.Component {
       this.props.addObject
       );
 
+
+    this.props.addBackground(initialBackground);  
+    this.props.addCenter(initialCenter, LOMID, 200);  
+    this.props.addOrbit(initialOrbit, TREBLE, 80);  
+    this.props.addText(initialText);  
 
     this.renderNextFrame();
 
@@ -54,7 +63,7 @@ class ThreeApp extends React.Component {
   componentDidUpdate() {
 
       //update Scene everytime state of scene changes
-      mapStateToScene(this.props.sceneState, this.props.frequencies, this.scene, this.props.clearObjectsToRemove, this.props.clearObjectsToEdit);
+      mapStateToScene(this.props.sceneState, this.props.frequencies, this.scene);
       this.renderNextFrame();
 
       //sample importing model
@@ -109,12 +118,13 @@ class ThreeApp extends React.Component {
 
 ThreeApp.propTypes = {
   sceneState: PropTypes.object,
-  frequencies: PropTypes.object,
+  frequencies: PropTypes.array,
   timestamp: PropTypes.number,
   update: PropTypes.func,
-  addObject: PropTypes.func,
-  clearObjectsToRemove: PropTypes.func,
-  clearObjectsToEdit: PropTypes.func,
+  addBackground: PropTypes.func,
+  addOrbit: PropTypes.func,
+  addCenter: PropTypes.func,
+  addText: PropTypes.func,
   setFrequencies: PropTypes.func
 
 }
@@ -131,10 +141,11 @@ const mapStateToProps = state => {
 
 const mapDispatch = (dispatch) => {
   return {
+    addOrbit: bindActionCreators(addOrbit, dispatch),
+    addCenter: bindActionCreators(addCenter, dispatch),
+    addBackground: bindActionCreators(addBackground, dispatch),
+    addText: bindActionCreators(addText, dispatch),
     update: bindActionCreators(update, dispatch),
-    addObject: bindActionCreators(addObject, dispatch),
-    clearObjectsToRemove: bindActionCreators(clearObjectsToRemove, dispatch),
-    clearObjectsToEdit: bindActionCreators(clearObjectsToEdit, dispatch),
     setFrequencies: bindActionCreators(setFrequencies, dispatch)
   };
 };

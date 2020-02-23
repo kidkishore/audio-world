@@ -55,8 +55,17 @@ module.exports = {
   },
   resolve: {
     alias: {
-      styles: path.resolve(__dirname, 'src/css/')
-    }
+      Actions: path.resolve(__dirname, 'src/actions'),
+      Reducers: path.resolve(__dirname, 'src/reducers'),
+      Components: path.resolve(__dirname, 'src/components'),
+      Containers: path.resolve(__dirname, 'src/containers'),
+      Containers: path.resolve(__dirname, 'src/containers'),
+      Models: path.resolve(__dirname, 'src/models'),
+      ThreeApp: path.resolve(__dirname, 'src/threeApp'),
+      Constants: path.resolve(__dirname, 'src/constants'),
+      src: path.resolve(__dirname, 'src')
+    },
+    extensions: ['.js','.css']
   },
   plugins: [
     new HtmlWebPackPlugin({

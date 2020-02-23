@@ -6,6 +6,8 @@ export const TREBLE = 4;
 
 export const MAXINT = 999999999;
 
+export const defaultColor = 0x4D4D4D;
+
 export const responses = [
   {
     key: 0,
@@ -17,19 +19,19 @@ export const responses = [
     key: 1,
     text: 'loMid',
     value: 1,
-    damping: 200
+    damping: 160
   },
   {
     key: 2,
     text: 'Mid',
     value: 2,
-    damping: 200
+    damping: 130
   },
   {
     key: 3,
     text: 'hiMid',
     value: 3,
-    damping: 200
+    damping: 100
   },
   {
     key: 4,
@@ -38,7 +40,6 @@ export const responses = [
     damping: 80
   },
 ];
-
 
 export const scenes = [
   {
@@ -89,23 +90,23 @@ export const backgrounds = [
 export const sceneDetail = {
   World: {
     Background: 'space.jpeg',
-    Center: 'Earth.glb',
-    Orbit: 'Duck.glb'
+    Center: 'Earth',
+    Orbit: 'Duck'
   },
   Pineapple: {
     Background: 'water.jpg',
-    Center: 'Pineapple.glb',
-    Orbit: 'Starfish.glb'
+    Center: 'Pineapple',
+    Orbit: 'Starfish'
   },
   Munnar: {
     Background: 'munnar.JPG',
-    Center: 'Helmet.glb',
-    Orbit: 'BrainStem.glb'
+    Center: 'Helmet',
+    Orbit: 'BrainStem'
   },
   Goomba: {
     Background: 'snow.jpg',
-    Center: 'Creature.glb',
-    Orbit: 'speaker.glb'
+    Center: 'Creature',
+    Orbit: 'speaker'
   },
 
 };

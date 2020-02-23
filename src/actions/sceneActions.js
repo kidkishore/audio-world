@@ -1,66 +1,124 @@
+import {
+  getBackground,
+  getCenter,
+  getOrbit,
+  getText
+} from '../reducers/sceneHelper';
+import { defaultColor } from '../constants'; 
 
-/*
-Takes in ID, name, response variable(treble, bass, etc.), and damping amount (Dividing 256 by amount to scale)
-*/
-export const addObject = (id, value, name, response, responseDamp) => dispatch => {
+//---------BACKGROUND ACTIONS---------//
+export const addBackground = (name) => dispatch => {
+  dispatch(getBackground({name, id: null, editing: false}));
+};
+
+export const editBackground = (name, id) => dispatch => {
+  dispatch(getBackground({name, id, editing: true}));
+};
+
+export const updateBackground = (dispatch, payload) => {
+  dispatch( {
+      type: 'ADD_BACKGROUND_SUCCESS',
+      payload
+  });
+}
+
+//---------CENTER ACTIONS---------//
+export const addCenter = (name, response, responseDamp) => dispatch => {
+  dispatch(getCenter({
+    name,
+    id: null,
+    response,
+    responseDamp,
+    editing: false
+  }));
+};
+
+export const editCenter = (name, id, response, responseDamp) => dispatch => {
+  dispatch(getCenter({
+    name,
+    id,
+    response,
+    responseDamp,
+    editing: true
+  }));
+};
+
+//triggered during model change
+export const changeCenter = (payload) => {
+  return {
+      type: 'ADD_CENTER_SUCCESS',
+      payload
+  };
+};
+
+export const updateCenter = payload => dispatch => {
   dispatch({
-      type: 'ADD_OBJECT',
-      id: id,
-      value: value,
-      name: name,
-      response: response,
-      responseDamp: responseDamp
+      type: 'UPDATE_CENTER',
+      payload
   });
 };
 
-export const deleteObject = id => dispatch => {
+//---------ORBIT ACTIONS---------//
+
+export const addOrbit = (name, response, responseDamp) => dispatch => {
+  dispatch(getOrbit({
+    name,
+    id: null,
+    response,
+    responseDamp,
+    editing: false
+  }));
+};
+
+export const editOrbit = (name, id, response, responseDamp) => dispatch => {
+  dispatch(getOrbit({
+    name,
+    id,
+    response,
+    responseDamp,
+    editing: true
+  }));
+};
+
+
+export const changeOrbit = (payload) => {
+  return {
+      type: 'ADD_ORBIT_SUCCESS',
+      payload
+  };
+};
+
+export const updateOrbit = payload => dispatch => {
   dispatch({
-      type: 'DELETE_OBJECT',
-      id: id,
+      type: 'UPDATE_ORBIT',
+      payload
   });
 };
 
-export const editObject = (name, id) => dispatch => {
-  dispatch({
-      type: 'EDIT_OBJECT',
-      name: name,
-      id: id,
-  });
+//---------Text ACTIONS---------//
+
+export const addText = (data) => dispatch => {
+  dispatch(getText({
+    data,
+    id: null,
+    color: defaultColor,
+    editing: false
+  }));
 };
 
-export const editObjectFreq = (freq, damping, id) => dispatch => {
-  dispatch({
-      type: 'EDIT_OBJECT_FREQ',
-      response: freq,
-      responseDamp: damping,
-      id: id,
-  });
+export const editText = (data, id, color) => dispatch => {
+  dispatch(getText({
+    data,
+    id,
+    color,
+    editing: true
+  }));
 };
 
-export const changeScene = scene => dispatch => {
-  dispatch({
-      type: 'CHANGE_SCENE',
-      payload: scene
-  });
-};
 
-export const changeTransform = (newObject, id) => dispatch => {
-  dispatch({
-      type: 'CHANGE_TRANSFORM',
-      newObject: newObject,
-      id
+export const updateText = (dispatch, payload) => {
+  dispatch( {
+      type: 'ADD_TEXT_SUCCESS',
+      payload
   });
-};
-
-export const clearObjectsToRemove = () => dispatch => {
-  dispatch({
-      type: 'CLEAR_OTR'
-  });
-};
-
-export const clearObjectsToEdit = () => dispatch => {
-  dispatch({
-      type: 'CLEAR_OTE'
-  });
-};
-
+}

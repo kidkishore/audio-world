@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Accordion, Header, Icon } from 'semantic-ui-react';
-import ObjectControls from './ObjectControls';
+import { Accordion } from 'semantic-ui-react';
+import ObjectEntry from './ObjectEntry';
+import BackgroundControl from './BackgroundControl';
+import CenterControl from './CenterControl';
+import OrbitControl from './OrbitControl';
+import TextControl from './TextControl';
 import './SceneMenu.css';
 
 class ObjectsMenu extends Component {
@@ -23,30 +25,11 @@ class ObjectsMenu extends Component {
     
     return (
           <div className="objectsAccordian">
-            <Header as='h3' textAlign='left' inverted>Objects</Header>
             <Accordion>
-              {this.props.objects.map(object => {
-                return(
-                  <div key={object.id}>
-                    {object.name !== 'Background' && object.name !== 'Text'  && 
-                      <div>
-                        <Accordion.Title
-                          active={activeIndex === object.id}
-                          index={object.id}
-                          onClick={this.handleClick}
-                        >
-                          <Icon name='dropdown' />
-                          {object.name}
-                        </Accordion.Title>
-                        <Accordion.Content active={activeIndex === object.id}>
-                          <ObjectControls object={object} name='aaaa'/>
-                        </Accordion.Content>
-                      </div>
-                    }
-                    </div>
-                  )
-                })
-              }
+            <ObjectEntry name={'Background'} id={0} activeIndex={activeIndex} handleClick={this.handleClick} child={<BackgroundControl/>} />
+            <ObjectEntry name={'Center'} id={1} activeIndex={activeIndex} handleClick={this.handleClick} child={<CenterControl/>} />
+            <ObjectEntry name={'Orbit'} id={2} activeIndex={activeIndex} handleClick={this.handleClick} child={<OrbitControl/>} />
+            <ObjectEntry name={'Text'} id={3} activeIndex={activeIndex} handleClick={this.handleClick} child={<TextControl/>} />
             </Accordion>
           </div>
       );
@@ -54,18 +37,5 @@ class ObjectsMenu extends Component {
 
 }
 
-ObjectsMenu.defaultProps = {
-  objects: []
-};
 
-ObjectsMenu.propTypes = {
-  objects: PropTypes.array
-};
-
-const mapStateToProps = state => {
-  return {
-      objects: state.scene.objects,
-  };
-};
-
-export default connect(mapStateToProps, null)(ObjectsMenu);
+export default ObjectsMenu;

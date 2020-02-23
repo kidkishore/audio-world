@@ -69,6 +69,11 @@ class FrequencyViz extends Component {
     }
 }
 
+FrequencyViz.propTypes = {
+  frequencies: PropTypes.array,
+  ampControl: PropTypes.object,
+}
+
 const mapStateToProps = state => {
     return {
         frequencies: state.audio.frequencies,
